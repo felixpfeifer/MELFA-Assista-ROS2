@@ -5,8 +5,33 @@
 # Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
 # Note that environment variables can be set in several places
 # See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+
+image: osrf/ros:humble-desktop
+
 stages:
-- test
+  - build
+  - test
+
+before_script:
+  - apt-get update && apt-get install -y python3-colcon-common-extensions
+  - source /opt/ros/humble/setup.bash
+
+build_job:
+  stage: build
+  script:
+    - colcon build --symlink-install
+  artifacts:
+    paths:
+      - install/
+      - log/
+      - build/
+
+test_job:
+  stage: test
+  script:
+    - colcon test --event-handlers console_direct+
+    - colcon test-result --verbose
+
 sast:
   stage: test
 include:
