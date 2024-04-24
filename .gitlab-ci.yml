@@ -26,8 +26,7 @@ build_job:
       - log/
       - build/
 
-test_job:
+sast:
   stage: test
-  script:
-    - colcon test --event-handlers console_direct+
-    - colcon test-result --verbose
+include:
+- template: Security/SAST.gitlab-ci.yml
