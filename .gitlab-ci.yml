@@ -21,7 +21,7 @@ before_script:
 build_job:
   stage: build
   script:
-    - colcon build --symlink-install
+    - colcon build
   artifacts:
     paths:
       - install/
