@@ -89,7 +89,7 @@ install(TARGETS melfa-assista-hardware
 )
 
 install(
-        DIRECTORY bringup/launch bringup/config
+        DIRECTORY bringup/launch 
         DESTINATION share/melfa-assista-hardware
 )
 
