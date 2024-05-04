@@ -122,13 +122,13 @@ def generate_launch_description():
     
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_trajectory_controller", "--controller-manager", "/controller_manager"],
+        arguments=["robot_controller", "--controller-manager", "/controller_manager"],
         )
 
     # Delay start of robot_controller after `joint_state_broadcaster`
     delay_robot_controller_spawner_after_joint_state_broadcaster_spawner = RegisterEventHandler(
         event_handler=OnProcessExit(
-            target_action=joint_state_broadcaster_spawner,
+            target_action=control_node,
             on_exit=[robot_controller_spawner],
         )
     )
@@ -139,7 +139,7 @@ def generate_launch_description():
         robot_state_pub_node,
         delayed_controller_manager,
         joint_state_broadcaster_spawner,
-        delay_robot_controller_spawner_after_joint_state_broadcaster_spawner
+        robot_controller_spawner
     ]
 
     

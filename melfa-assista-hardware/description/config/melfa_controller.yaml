@@ -2,13 +2,16 @@ controller_manager:
   ros__parameters:
     update_rate: 200  # Hz
 
-    joint_trajectory_controller:
+    robot_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-joint_trajectory_controller:
+    gpio_controller:
+      type: melfa_assista_ros2_hw/GPIOController
+
+robot_controller:
   ros__parameters:
     command_interfaces:
       - position
@@ -22,5 +25,8 @@ joint_trajectory_controller:
       - joint_5
       - joint_6
       
-    state_publish_rate: 50.0
+    state_publish_rate: 200.0
     action_monitor_rate: 20.0
+
+gpio_controller:  
+  

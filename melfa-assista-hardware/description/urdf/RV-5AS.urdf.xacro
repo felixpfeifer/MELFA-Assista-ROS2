@@ -185,7 +185,7 @@
   <parent link="base_link"/>
   <child link="Link_1_1"/>
   <axis xyz="0.0 0.0 1.0"/>
-  <limit lower="${-(240 * pi)/180}" upper="${(240 * pi)/180}" effort="100" velocity="${(124*pi)/180}"/>
+  <limit lower="${-(240 * pi)/180}" upper="${(240 * pi)/180}" effort="1000" velocity="${(124*pi)/180}"/>
 </joint>
 
 <joint name="joint_2" type="revolute">
@@ -193,7 +193,7 @@
   <parent link="Link_1_1"/>
   <child link="Link_2_1"/>
   <axis xyz="0.0 1.0 -0.0"/>
-  <limit lower="${-(148 * pi)/180}" upper="${(148 * pi)/180}" effort="100" velocity="${(124*pi)/180}"/>
+  <limit lower="${-(148 * pi)/180}" upper="${(148 * pi)/180}" effort="1000" velocity="${(124*pi)/180}"/>
 </joint>
 
 <joint name="joint_3" type="revolute">
@@ -201,7 +201,7 @@
   <parent link="Link_2_1"/>
   <child link="Link_3_1"/>
   <axis xyz="-0.0 1.0 0.0"/>
-  <limit lower="${-(150 * pi)/180}" upper="${(150 * pi)/180}" effort="100" velocity="${(124*pi)/180}"/>
+  <limit lower="${-(150 * pi)/180}" upper="${(150 * pi)/180}" effort="1000" velocity="${(124*pi)/180}"/>
 </joint>
 
 <joint name="joint_4" type="revolute">
@@ -209,7 +209,7 @@
   <parent link="Link_3_1"/>
   <child link="Link_4_1"/>
   <axis xyz="0.0 0.0 1.0"/>
-  <limit lower="${-(200 * pi)/180}" upper="${(200 * pi)/180}" effort="100" velocity="${(124*pi)/180}"/>
+  <limit lower="${-(200 * pi)/180}" upper="${(200 * pi)/180}" effort="1000" velocity="${(124*pi)/180}"/>
 </joint>
 
 <joint name="joint_5" type="revolute">
@@ -217,7 +217,7 @@
   <parent link="Link_4_1"/>
   <child link="Link_5_1"/>
   <axis xyz="0.0 1.0 -0.0"/>
-  <limit lower="${-(120 * pi)/180}" upper="${(120 * pi)/180}" effort="100" velocity="${(356*pi)/180}"/>
+  <limit lower="${-(120 * pi)/180}" upper="${(120 * pi)/180}" effort="1000" velocity="${(356*pi)/180}"/>
 </joint>
 
 <joint name="joint_6" type="revolute">
@@ -225,7 +225,7 @@
   <parent link="Link_5_1"/>
   <child link="Link_6_1"/>
   <axis xyz="0.0 0.0 1.0"/>
-  <limit lower="${-(200 * pi)/180}" upper="${(200 * pi)/180}" effort="100" velocity="${(360*pi)/180}"/>
+  <limit lower="${-(200 * pi)/180}" upper="${(200 * pi)/180}" effort="1000" velocity="${(360*pi)/180}"/>
 </joint>
 
 </robot>

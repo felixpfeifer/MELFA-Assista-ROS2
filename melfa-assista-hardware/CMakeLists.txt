@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(melfa_assita_ros2_hw)
+project(melfa-assista-hardware)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)

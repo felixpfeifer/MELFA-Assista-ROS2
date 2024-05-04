@@ -38,6 +38,8 @@ namespace melfa_hardware
 class MelfaHW : public hardware_interface::SystemInterface {
 public:
 
+    RCLCPP_SHARED_PTR_DEFINITIONS(MelfaHW);
+
     /**
      * Constructor of the Hardware Interface
      * Loads the urdf and gets the roboter ip Adress
@@ -106,13 +108,13 @@ protected:
     std::vector<double> joint_position_command_; // Vector for the joint position command
     std::vector<double> joint_position_state_; // Vector for the joint position state
 private:
-    MXTCMD send_buff; // Buffer for the Joint Position Command with the MXT-Command Packet
-    MXTCMD recv_buff; // Buffer for the Joint Position Position with the MXT-Command Packet
-    std::string robot_ip; // IP-Address of the robot as a string
-    struct sockaddr_in addr; // Struct for the socket address
-    int counter_;
-    int sock;  // Socket for the connection to the robot
-    rclcpp::Logger logger = rclcpp::get_logger("melfa_assita_ros2_hw"); // Logger for the hardware interface 
+    MXTCMD _send_buff; // Buffer for the Joint Position Command with the MXT-Command Packet
+    MXTCMD _recv_buff; // Buffer for the Joint Position Position with the MXT-Command Packet
+    std::string _robot_ip; // IP-Address of the robot as a string
+    struct sockaddr_in _addres; // Struct for the socket address
+    int _counter;
+    int _socket;  // Socket for the connection to the robot
+    rclcpp::Logger _logger = rclcpp::get_logger("melfa_assita_ros2_hw"); // Logger for the hardware interface 
 
 };
 }
