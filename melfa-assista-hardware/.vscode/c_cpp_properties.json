@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "${default}",
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "includePath": [
+                "/home/felix/HHN/Seminararbeit/dev_ws/install/melfa_assita_ros2_hw/include/**",
+                "/opt/ros/humble/include/**",
+                "/home/felix/HHN/Seminararbeit/dev_ws/src/melfa_assita_ros2_hw/include/**",
+                "/home/felix/HHN/Seminararbeit/dev_ws/src/melfa_assita_ros2_hw/include/**",
+                "/home/felix/HHN/Seminararbeit/dev_ws/src/robo_vision/include/**",
+                "/usr/include/**"
+            ],
+            "name": "ROS",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "c++14",
+            "configurationProvider": "ms-vscode.cmake-tools"
+        }
+    ],
+    "version": 4
+}

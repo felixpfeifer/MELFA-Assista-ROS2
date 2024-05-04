@@ -1,0 +1,8 @@
+<library path="melfa-assista-hardware">
+    <class name="melfa-assista-hardware/MelfaHW"
+            type="melfa_hardware::MelfaHW"
+            base_class_type="hardware_interface::SystemInterface">
+        <description>
+        </description>
+    </class>
+</library>

@@ -14,12 +14,14 @@ stages:
 
 before_script:
   - apt-get update && apt-get install -y python3-colcon-common-extensions
+  - apt-get install -y ros-humble-ros2-control
+  - apt-get install -y ros-humble-ros2-controllers
   - source /opt/ros/humble/setup.bash
 
 build_job:
   stage: build
   script:
-    - colcon build --symlink-install
+    - colcon build
   artifacts:
     paths:
       - install/

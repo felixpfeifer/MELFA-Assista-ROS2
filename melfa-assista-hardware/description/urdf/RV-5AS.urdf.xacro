@@ -6,16 +6,16 @@
 <xacro:arg name="use_fake_hardware" default="true" />
 <xacro:arg name="robot_ip" default="127.0.0.1" />
 
-<xacro:include filename="$(find melfa_robot)/urdf/materials.xacro" />
-<xacro:include filename="$(find melfa_robot)/urdf/RV-5AS.gazebo" />
-<xacro:include filename="$(find melfa_robot)/ros2_control/melfa.ros2_control.xacro" />
+<xacro:include filename="$(find melfa-assista-hardware)/urdf/materials.xacro" />
+<xacro:include filename="$(find melfa-assista-hardware)/urdf/RV-5AS.gazebo" />
+<xacro:include filename="$(find melfa-assista-hardware)/ros2_control/melfa.ros2_control.xacro" />
 
 <!-- Enable Gazebo Plugins -->
   <gazebo>
     <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
       <!-- <robot_param>robot_description</robot_param>
       <robot_param_node>robot_state_publisher</robot_param_node> -->
-      <parameters>$(find melfa_robot)/config/melfa_controller.yaml</parameters>
+      <parameters>$(find melfa-assista-hardware)/config/melfa_controller.yaml</parameters>
     </plugin>
   </gazebo>
 
@@ -35,7 +35,7 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_robot/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://melfa-assista-hardware/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       <cylinder radius="0.5" length="1.0"/>
     </geometry>
     <material name="silver"/>
@@ -43,7 +43,7 @@
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_robot/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://melfa-assista-hardware/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -57,14 +57,14 @@
   <visual>
     <origin xyz="-0.000321 -0.000483 -0.169215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_robot/meshes/Link_1_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://melfa-assista-hardware/meshes/Link_1_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.000321 -0.000483 -0.169215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_robot/meshes/Link_1_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://melfa-assista-hardware/meshes/Link_1_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -78,14 +78,14 @@
   <visual>
     <origin xyz="-0.000321 -0.091983 -0.252215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_robot/meshes/Link_2_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://melfa-assista-hardware/meshes/Link_2_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.000321 -0.091983 -0.252215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_robot/meshes/Link_2_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://melfa-assista-hardware/meshes/Link_2_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -99,14 +99,14 @@
   <visual>
     <origin xyz="-0.000321 -0.091983 -0.662215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_robot/meshes/Link_3_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://melfa-assista-hardware/meshes/Link_3_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.000321 -0.091983 -0.662215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_robot/meshes/Link_3_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://melfa-assista-hardware/meshes/Link_3_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -120,14 +120,14 @@
   <visual>
     <origin xyz="-0.000488 -0.000483 -0.819715" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_robot/meshes/Link_4_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://melfa-assista-hardware/meshes/Link_4_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.000488 -0.000483 -0.819715" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_robot/meshes/Link_4_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://melfa-assista-hardware/meshes/Link_4_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -141,14 +141,14 @@
   <visual>
     <origin xyz="-0.000488 0.051017 -1.165215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_robot/meshes/Link_5_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://melfa-assista-hardware/meshes/Link_5_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.000488 0.051017 -1.165215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_robot/meshes/Link_5_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://melfa-assista-hardware/meshes/Link_5_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -162,14 +162,14 @@
   <visual>
     <origin xyz="-0.000317 -0.001983 -1.271215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_robot/meshes/Link_6_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://melfa-assista-hardware/meshes/Link_6_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.000317 -0.001983 -1.271215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_robot/meshes/Link_6_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="package://melfa-assista-hardware/meshes/Link_6_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -185,7 +185,7 @@
   <parent link="base_link"/>
   <child link="Link_1_1"/>
   <axis xyz="0.0 0.0 1.0"/>
-  <limit lower="${-(240 * pi)/180}" upper="${(240 * pi)/180}" effort="100" velocity="${(124*pi)/180}"/>
+  <limit lower="${-(240 * pi)/180}" upper="${(240 * pi)/180}" effort="1000" velocity="${(124*pi)/180}"/>
 </joint>
 
 <joint name="joint_2" type="revolute">
@@ -193,7 +193,7 @@
   <parent link="Link_1_1"/>
   <child link="Link_2_1"/>
   <axis xyz="0.0 1.0 -0.0"/>
-  <limit lower="${-(148 * pi)/180}" upper="${(148 * pi)/180}" effort="100" velocity="${(124*pi)/180}"/>
+  <limit lower="${-(148 * pi)/180}" upper="${(148 * pi)/180}" effort="1000" velocity="${(124*pi)/180}"/>
 </joint>
 
 <joint name="joint_3" type="revolute">
@@ -201,7 +201,7 @@
   <parent link="Link_2_1"/>
   <child link="Link_3_1"/>
   <axis xyz="-0.0 1.0 0.0"/>
-  <limit lower="${-(150 * pi)/180}" upper="${(150 * pi)/180}" effort="100" velocity="${(124*pi)/180}"/>
+  <limit lower="${-(150 * pi)/180}" upper="${(150 * pi)/180}" effort="1000" velocity="${(124*pi)/180}"/>
 </joint>
 
 <joint name="joint_4" type="revolute">
@@ -209,7 +209,7 @@
   <parent link="Link_3_1"/>
   <child link="Link_4_1"/>
   <axis xyz="0.0 0.0 1.0"/>
-  <limit lower="${-(200 * pi)/180}" upper="${(200 * pi)/180}" effort="100" velocity="${(124*pi)/180}"/>
+  <limit lower="${-(200 * pi)/180}" upper="${(200 * pi)/180}" effort="1000" velocity="${(124*pi)/180}"/>
 </joint>
 
 <joint name="joint_5" type="revolute">
@@ -217,7 +217,7 @@
   <parent link="Link_4_1"/>
   <child link="Link_5_1"/>
   <axis xyz="0.0 1.0 -0.0"/>
-  <limit lower="${-(120 * pi)/180}" upper="${(120 * pi)/180}" effort="100" velocity="${(356*pi)/180}"/>
+  <limit lower="${-(120 * pi)/180}" upper="${(120 * pi)/180}" effort="1000" velocity="${(356*pi)/180}"/>
 </joint>
 
 <joint name="joint_6" type="revolute">
@@ -225,7 +225,7 @@
   <parent link="Link_5_1"/>
   <child link="Link_6_1"/>
   <axis xyz="0.0 0.0 1.0"/>
-  <limit lower="${-(200 * pi)/180}" upper="${(200 * pi)/180}" effort="100" velocity="${(360*pi)/180}"/>
+  <limit lower="${-(200 * pi)/180}" upper="${(200 * pi)/180}" effort="1000" velocity="${(360*pi)/180}"/>
 </joint>
 
 </robot>
