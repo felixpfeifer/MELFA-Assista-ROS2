@@ -3,7 +3,7 @@
     <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
 
     <!-- Import Assista urdf file -->
-    <xacro:include filename="$(find melfa_assita_ros2_hw)/urdf/RV-5AS.urdf.xacro" />
+    <xacro:include filename="$(find melfa-assista-hardware)/urdf/RV-5AS.urdf.xacro" />
 
     <!-- Import control_xacro -->
     <xacro:include filename="Assista.ros2_control.xacro" />

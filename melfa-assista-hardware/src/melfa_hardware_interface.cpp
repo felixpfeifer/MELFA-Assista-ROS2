@@ -2,7 +2,7 @@
 // Created by felix on 05.03.24.
 //
 
-#include "melfa_assita_ros2_hw/melfa_hardware_interface.hpp"
+#include "melfa-assista-hardware/melfa_hardware_interface.hpp"
 
 CallbackReturn melfa_hardware::MelfaHW::on_init(const hardware_interface::HardwareInfo &info) {
     if (hardware_interface::SystemInterface::on_init(info) != CallbackReturn::SUCCESS){

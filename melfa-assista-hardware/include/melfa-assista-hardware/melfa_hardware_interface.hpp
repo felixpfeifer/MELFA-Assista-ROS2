@@ -19,8 +19,8 @@
 #include <arpa/inet.h>
 #include <rclcpp/rclcpp.hpp>
 
-#include "melfa_assita_ros2_hw/strdef.hpp"
-#include "melfa_assita_ros2_hw/visibility_control.h"
+#include "melfa-assista-hardware/strdef.hpp"
+#include "melfa-assista-hardware/visibility_control.h"
 
 #define joint_number 6
 #define _period 0.0071
@@ -114,7 +114,7 @@ private:
     struct sockaddr_in _addres; // Struct for the socket address
     int _counter;
     int _socket;  // Socket for the connection to the robot
-    rclcpp::Logger _logger = rclcpp::get_logger("melfa_assita_ros2_hw"); // Logger for the hardware interface 
+    rclcpp::Logger _logger = rclcpp::get_logger("melfa-assista-hardware"); // Logger for the hardware interface 
 
 };
 }

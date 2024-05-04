@@ -39,13 +39,13 @@ target_include_directories(
 )
 
 
-target_compile_features(melfa_assita_ros2_hw PUBLIC cxx_std_17)
-target_include_directories(melfa_assita_ros2_hw PUBLIC
+target_compile_features(melfa-assista-hardware PUBLIC cxx_std_17)
+target_include_directories(melfa-assista-hardware PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-        $<INSTALL_INTERFACE:include/melfa_assita_ros2_hw>
+        $<INSTALL_INTERFACE:include/melfa-assista-hardware>
 )
 ament_target_dependencies(
-  melfa_assita_ros2_hw PUBLIC
+  melfa-assista-hardware PUBLIC
         ${THIS_PACKAGE_INCLUDE_DEPENDS}
 )
 
@@ -78,11 +78,11 @@ install(
 )
 install(
         DIRECTORY description/ros2_control description/urdf description/meshes description/config
-        DESTINATION share/melfa_assita_ros2_hw
+        DESTINATION share/melfa-assista-hardware
 )
 
-install(TARGETS melfa_assita_ros2_hw
-        EXPORT export_melfa_assita_ros2_hw
+install(TARGETS melfa-assista-hardware
+        EXPORT export_melfa-assista-hardware
         ARCHIVE DESTINATION lib
         LIBRARY DESTINATION lib
         RUNTIME DESTINATION bin
@@ -90,10 +90,10 @@ install(TARGETS melfa_assita_ros2_hw
 
 install(
         DIRECTORY bringup/launch bringup/config
-        DESTINATION share/melfa_assita_ros2_hw
+        DESTINATION share/melfa-assista-hardware
 )
 
 
-ament_export_targets(export_melfa_assita_ros2_hw HAS_LIBRARY_TARGET)
+ament_export_targets(export_melfa-assista-hardware HAS_LIBRARY_TARGET)
 ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
 ament_package()
