@@ -7,7 +7,7 @@ moveit_setup_assistant_config:
   package_settings:
     author_name: Felix Pfeifer
     author_email: fpfeifer@stud.hs-heilbronn.de
-    generated_timestamp: 1714489950
+    generated_timestamp: 1715158093
   control_xacro:
     command:
       - position

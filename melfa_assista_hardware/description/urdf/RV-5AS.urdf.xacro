@@ -8,11 +8,13 @@
 
 <xacro:include filename="$(find melfa_assista_hardware)/urdf/materials.xacro" />
 <xacro:include filename="$(find melfa_assista_hardware)/urdf/RV-5AS.gazebo" />
+<xacro:include filename="$(find melfa_assista_hardware)/urdf/Co-Act.xacro" />
+
 <xacro:include filename="$(find melfa_assista_hardware)/ros2_control/melfa.ros2_control.xacro" />
 
 <!-- Enable Gazebo Plugins -->
   <gazebo>
-    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control.">
       <!-- <robot_param>robot_description</robot_param>
       <robot_param_node>robot_state_publisher</robot_param_node> -->
       <parameters>$(find melfa_assista_hardware)/config/melfa_controller.yaml</parameters>
@@ -226,6 +228,13 @@
   <child link="Link_6_1"/>
   <axis xyz="0.0 0.0 1.0"/>
   <limit lower="${-(200 * pi)/180}" upper="${(200 * pi)/180}" effort="1000" velocity="${(360*pi)/180}"/>
+</joint>
+
+<!-- Tool Joint Connection to the Robot -->
+<joint name="joint_tool_robot" type="fixed">
+  <origin xyz="0.0 0.0 0.0" rpy="-${(pi/2)} 0.0 ${(pi/2)}"/>
+  <parent link="Link_6_1"/>
+  <child link="base_coact_link"/>
 </joint>
 
 </robot>

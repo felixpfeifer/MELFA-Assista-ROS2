@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by
+Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="Co-Act">
+  <link name="base_coact_link">
+    <inertial>
+      <origin
+        xyz="-0.0013084 -0.0011932 -0.0064058"
+        rpy="0 0 0" />
+      <mass
+        value="0.050395" />
+      <inertia
+        ixx="3.0458E-05"
+        ixy="2.8636E-07"
+        ixz="-1.9145E-07"
+        iyy="2.6439E-05"
+        iyz="-9.0497E-08"
+        izz="5.4519E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/base_coact_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75686 0.76863 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/base_coact_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="flansch_link">
+    <inertial>
+      <origin
+        xyz="4.8114E-05 4.8114E-05 -0.0046936"
+        rpy="0 0 0" />
+      <mass
+        value="0.028627" />
+      <inertia
+        ixx="9.2813E-06"
+        ixy="1.5667E-08"
+        ixz="2.2814E-09"
+        iyy="9.2813E-06"
+        iyz="2.2814E-09"
+        izz="1.8154E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/flansch_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75686 0.76863 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/flansch_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_coact_1"
+    type="fixed">
+    <origin
+      xyz="0 -0.0091 0"
+      rpy="-1.5708 -0.7854 3.1416" />
+    <parent
+      link="base_coact_link" />
+    <child
+      link="flansch_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="gehaeuse_link">
+    <inertial>
+      <origin
+        xyz="0.0005658 -1.4838E-05 -0.077807"
+        rpy="0 0 0" />
+      <mass
+        value="0.323" />
+      <inertia
+        ixx="0.00041011"
+        ixy="5.6177E-08"
+        ixz="-1.1974E-06"
+        iyy="0.00045102"
+        iyz="1.3574E-07"
+        izz="0.00031315" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/gehaeuse_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75686 0.76863 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/gehaeuse_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_coact_2"
+    type="fixed">
+    <origin
+      xyz="0 0 0.1089"
+      rpy="0 0 -2.3562" />
+    <parent
+      link="flansch_link" />
+    <child
+      link="gehaeuse_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="epg_link">
+    <inertial>
+      <origin
+        xyz="-1.077E-05 0.039649 -6.2582E-06"
+        rpy="0 0 0" />
+      <mass
+        value="0.078924" />
+      <inertia
+        ixx="4.5106E-05"
+        ixy="-2.4411E-08"
+        ixz="1.5006E-10"
+        iyy="1.4707E-05"
+        iyz="2.4187E-08"
+        izz="5.0653E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/epg_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75686 0.76863 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/epg_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_coact_3"
+    type="fixed">
+    <origin
+      xyz="0 0 -0.0883"
+      rpy="1.5708 0 0" />
+    <parent
+      link="gehaeuse_link" />
+    <child
+      link="epg_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="fingerbasis_1_link">
+    <inertial>
+      <origin
+        xyz="0.0041299 -0.014899 0.0033367"
+        rpy="0 0 0" />
+      <mass
+        value="0.0033697" />
+      <inertia
+        ixx="2.0656E-07"
+        ixy="-1.2393E-07"
+        ixz="4.4099E-08"
+        iyy="3.866E-07"
+        iyz="4.1898E-08"
+        izz="5.0604E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/fingerbasis_1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75686 0.76863 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/fingerbasis_1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_coact_fingerb_1"
+    type="prismatic">
+    <origin
+      xyz="0 0.10015 0"
+      rpy="0 0 0" />
+    <parent
+      link="epg_link" />
+    <child
+      link="fingerbasis_1_link" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="finger_1_link">
+    <inertial>
+      <origin
+        xyz="0.005521 0.024984 -0.0013035"
+        rpy="0 0 0" />
+      <mass
+        value="0.016259" />
+      <inertia
+        ixx="3.2118E-06"
+        ixy="9.0183E-08"
+        ixz="1.7649E-11"
+        iyy="1.1672E-06"
+        iyz="-8.9973E-14"
+        izz="2.581E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/finger_1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/finger_1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_coact_finger_1"
+    type="fixed">
+    <origin
+      xyz="0.023769 0.035996 0.0020252"
+      rpy="-0.017453 0 3.1416" />
+    <parent
+      link="fingerbasis_1_link" />
+    <child
+      link="finger_1_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="fingerbasis_2_link">
+    <inertial>
+      <origin
+        xyz="0.0211298784943377 -0.0148988514955782 0.0033366752274273"
+        rpy="0 0 0" />
+      <mass
+        value="0.00336969440821799" />
+      <inertia
+        ixx="2.06558487217443E-07"
+        ixy="-1.23928099412369E-07"
+        ixz="4.4098671541406E-08"
+        iyy="3.86603477559186E-07"
+        iyz="4.18978494824805E-08"
+        izz="5.06038543922911E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/fingerbasis_2_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.756862745098039 0.768627450980392 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/fingerbasis_2_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_coact_fingerb_2"
+    type="prismatic">
+    <origin
+      xyz="0.017 0.10015 0"
+      rpy="3.1416 0 -3.1416" />
+    <parent
+      link="epg_link" />
+    <child
+      link="fingerbasis_2_link" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="0"
+      upper="0"
+      effort="0"
+      velocity="0" />
+    <mimic
+      joint="joint_coact_fingerb_1"
+      multiplier="-1"
+      offset="0" />
+  </joint>
+  <link
+    name="finger_2_link">
+    <inertial>
+      <origin
+        xyz="0.005521 0.024984 -0.0013035"
+        rpy="0 0 0" />
+      <mass
+        value="0.016259" />
+      <inertia
+        ixx="3.2118E-06"
+        ixy="9.0183E-08"
+        ixz="1.6559E-11"
+        iyy="1.1672E-06"
+        iyz="-6.5147E-13"
+        izz="2.581E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/finger_2_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://melfa_assista_hardware/meshes/finger_2_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_coact_finger_2"
+    type="fixed">
+    <origin
+      xyz="0.044769 0.036041 0.00055837"
+      rpy="0.017453 0 3.1416" />
+    <parent
+      link="fingerbasis_2_link" />
+    <child
+      link="finger_2_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>
