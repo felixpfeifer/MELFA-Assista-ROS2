@@ -1,6 +1,6 @@
 moveit_setup_assistant_config:
   urdf:
-    package: melfa-assista-hardware
+    package: melfa_assista_hardware
     relative_path: urdf/RV-5AS.urdf.xacro
   srdf:
     relative_path: config/Assista.srdf

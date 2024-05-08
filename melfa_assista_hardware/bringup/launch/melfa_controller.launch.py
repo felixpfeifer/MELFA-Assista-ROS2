@@ -71,7 +71,7 @@ def generate_launch_description():
             " ",
             PathJoinSubstitution(
                 [
-                    FindPackageShare("melfa-assista-hardware"),
+                    FindPackageShare("melfa_assista_hardware"),
                     "urdf",
                     "RV-5AS.urdf.xacro",
                 ]
@@ -92,7 +92,7 @@ def generate_launch_description():
 
     robot_controllers_file = PathJoinSubstitution(
         [
-            FindPackageShare("melfa-assista-hardware"),
+            FindPackageShare("melfa_assista_hardware"),
             "config",
             "melfa_controller.yaml",
         ]

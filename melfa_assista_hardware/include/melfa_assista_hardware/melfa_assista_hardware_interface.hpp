@@ -3,8 +3,8 @@
  * Version 1.0
  */
 
-#ifndef MELFA_HARDWARE_INTERFACE_HPP_
-#define MELFA_HARDWARE_INTERFACE_HPP_
+#ifndef melfa_assista_hardware_INTERFACE_HPP_
+#define melfa_assista_hardware_INTERFACE_HPP_
 
 #include <string>
 #include <vector>
@@ -19,8 +19,8 @@
 #include <arpa/inet.h>
 #include <rclcpp/rclcpp.hpp>
 
-#include "melfa-assista-hardware/strdef.hpp"
-#include "melfa-assista-hardware/visibility_control.h"
+#include "melfa_assista_hardware/strdef.hpp"
+#include "melfa_assista_hardware/visibility_control.h"
 
 #define joint_number 6
 #define _period 0.0071
@@ -33,7 +33,7 @@ using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface
  * Hardware Interface for a 6 Axes MELFA Robot
  * 
  */
-namespace melfa_hardware
+namespace melfa_assista_hardware
 {
 class MelfaHW : public hardware_interface::SystemInterface {
 public:
@@ -45,28 +45,28 @@ public:
      * Loads the urdf and gets the roboter ip Adress
      *
     */
-    MELFA_HARDWARE_PUBLIC
+    melfa_assista_hardware_PUBLIC
     CallbackReturn on_init(const hardware_interface::HardwareInfo &info) override;
 
     /**
      * Exports the position state interfaces of the robot
      * @return Vector of the state interfaces
     */
-    MELFA_HARDWARE_PUBLIC
+    melfa_assista_hardware_PUBLIC
     std::vector<hardware_interface::StateInterface> export_state_interfaces() override;
 
     /**
     * Exports the position command interfaces of the robot
     * @return Vector of the command interfaces
     */
-    MELFA_HARDWARE_PUBLIC
+    melfa_assista_hardware_PUBLIC
     std::vector<hardware_interface::CommandInterface> export_command_interfaces() override;
 
-    MELFA_HARDWARE_PUBLIC
+    melfa_assista_hardware_PUBLIC
     CallbackReturn on_activate(const rclcpp_lifecycle::State &previous_state) override;
 
 
-    MELFA_HARDWARE_PUBLIC
+    melfa_assista_hardware_PUBLIC
     CallbackReturn on_deactivate(const rclcpp_lifecycle::State &previous_state) override;
 
 
@@ -77,21 +77,21 @@ public:
      * @param period
      * @return OK, if the robot sends data
      */
-    MELFA_HARDWARE_PUBLIC
+    melfa_assista_hardware_PUBLIC
     return_type read(const rclcpp::Time &time, const rclcpp::Duration &period) override;
 
     /**
      * Configures the hardware interface
      * Inits the communication with the robot and gets the current position of the robot
     */
-    MELFA_HARDWARE_PUBLIC
+    melfa_assista_hardware_PUBLIC
     CallbackReturn on_configure(const rclcpp_lifecycle::State &previous_state) override;
 
     /**
      * Cleans up the hardware interface
      * Closes the connection to the robot
      */
-    MELFA_HARDWARE_PUBLIC
+    melfa_assista_hardware_PUBLIC
     CallbackReturn on_cleanup(const rclcpp_lifecycle::State &previous_state) override;
 
     
@@ -100,7 +100,7 @@ public:
      * Sends a network packet over ethernet to the robot
      * @return SUCCESS if packet got send ERROR otherwise
      */
-    MELFA_HARDWARE_PUBLIC
+    melfa_assista_hardware_PUBLIC
     return_type write(const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/) override;
 
 protected:
@@ -114,9 +114,9 @@ private:
     struct sockaddr_in _addres; // Struct for the socket address
     int _counter;
     int _socket;  // Socket for the connection to the robot
-    rclcpp::Logger _logger = rclcpp::get_logger("melfa-assista-hardware"); // Logger for the hardware interface 
+    rclcpp::Logger _logger = rclcpp::get_logger("melfa_assista_hardware"); // Logger for the hardware interface 
 
 };
 }
 
-#endif  // MELFA_HARDWARE_INTERFACE_HPP_
+#endif  // melfa_assista_hardware_INTERFACE_HPP_
