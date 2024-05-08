@@ -2,9 +2,9 @@
 // Created by felix on 05.03.24.
 //
 
-#include "melfa-assista-hardware/melfa_hardware_interface.hpp"
+#include "melfa_assista_hardware/melfa_assista_hardware_interface.hpp"
 
-CallbackReturn melfa_hardware::MelfaHW::on_init(const hardware_interface::HardwareInfo &info) {
+CallbackReturn melfa_assista_hardware::MelfaHW::on_init(const hardware_interface::HardwareInfo &info) {
     if (hardware_interface::SystemInterface::on_init(info) != CallbackReturn::SUCCESS){
         return CallbackReturn::ERROR;
     }
@@ -57,7 +57,7 @@ CallbackReturn melfa_hardware::MelfaHW::on_init(const hardware_interface::Hardwa
     }
 
 
-std::vector<hardware_interface::StateInterface> melfa_hardware::MelfaHW::export_state_interfaces() {
+std::vector<hardware_interface::StateInterface> melfa_assista_hardware::MelfaHW::export_state_interfaces() {
     std::vector<hardware_interface::StateInterface> state_interfaces;
     for (uint i = 0; i < info_.joints.size(); i++)
     {
@@ -68,7 +68,7 @@ std::vector<hardware_interface::StateInterface> melfa_hardware::MelfaHW::export_
     return state_interfaces;
 }
 
-std::vector<hardware_interface::CommandInterface> melfa_hardware::MelfaHW::export_command_interfaces() {
+std::vector<hardware_interface::CommandInterface> melfa_assista_hardware::MelfaHW::export_command_interfaces() {
     std::vector<hardware_interface::CommandInterface> command_interfaces;
     for (uint i = 0; i < info_.joints.size(); i++)
     {
@@ -82,7 +82,7 @@ std::vector<hardware_interface::CommandInterface> melfa_hardware::MelfaHW::expor
 /**
  * @brief Function to write the command Position to the MELFA Robot
 */
-return_type melfa_hardware::MelfaHW::write(const rclcpp::Time &, const rclcpp::Duration &) {
+return_type melfa_assista_hardware::MelfaHW::write(const rclcpp::Time &, const rclcpp::Duration &) {
     //return return_type::OK;
     _counter++;
 
@@ -117,7 +117,7 @@ return_type melfa_hardware::MelfaHW::write(const rclcpp::Time &, const rclcpp::D
     
 }
 
-return_type melfa_hardware::MelfaHW::read(const rclcpp::Time & /*time*/, const rclcpp::Duration & period) {
+return_type melfa_assista_hardware::MelfaHW::read(const rclcpp::Time & /*time*/, const rclcpp::Duration & period) {
 
     int n = recvfrom(_socket,&_recv_buff,sizeof(_recv_buff),0,NULL,NULL);
     if (n < 0)
@@ -139,17 +139,17 @@ return_type melfa_hardware::MelfaHW::read(const rclcpp::Time & /*time*/, const r
 
 /**
 */
-CallbackReturn melfa_hardware::MelfaHW::on_configure(const rclcpp_lifecycle::State &previous_state) {
+CallbackReturn melfa_assista_hardware::MelfaHW::on_configure(const rclcpp_lifecycle::State &previous_state) {
     return CallbackReturn::SUCCESS;
 }
 
-CallbackReturn melfa_hardware::MelfaHW::on_cleanup(const rclcpp_lifecycle::State & previous_state){
+CallbackReturn melfa_assista_hardware::MelfaHW::on_cleanup(const rclcpp_lifecycle::State & previous_state){
     return CallbackReturn::SUCCESS;
 
 }
 
 
-CallbackReturn melfa_hardware::MelfaHW::on_activate(const rclcpp_lifecycle::State &previous_state) {
+CallbackReturn melfa_assista_hardware::MelfaHW::on_activate(const rclcpp_lifecycle::State &previous_state) {
 
 
     
@@ -234,7 +234,7 @@ CallbackReturn melfa_hardware::MelfaHW::on_activate(const rclcpp_lifecycle::Stat
     std::cout << "Succesful set Postion to inital of the Robot" << "\n";
 }
 
-CallbackReturn melfa_hardware::MelfaHW::on_deactivate(const rclcpp_lifecycle::State &previous_state) {
+CallbackReturn melfa_assista_hardware::MelfaHW::on_deactivate(const rclcpp_lifecycle::State &previous_state) {
     return CallbackReturn::SUCCESS;
     
 }
@@ -242,4 +242,4 @@ CallbackReturn melfa_hardware::MelfaHW::on_deactivate(const rclcpp_lifecycle::St
 #include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(
-        melfa_hardware::MelfaHW, hardware_interface::SystemInterface)
+        melfa_assista_hardware::MelfaHW, hardware_interface::SystemInterface)

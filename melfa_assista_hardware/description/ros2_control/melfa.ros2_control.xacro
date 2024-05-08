@@ -17,7 +17,7 @@
             <param name="state_following_offset">0.0</param>
           </xacro:if>
           <xacro:unless value="${use_fake_hardware}">
-            <plugin>melfa-assista-hardware/MelfaHW</plugin>
+            <plugin>melfa_assista_hardware/MelfaHW</plugin>
             <param name="robot_ip">${robot_ip}</param>
           </xacro:unless>
         </hardware>
@@ -84,10 +84,6 @@
 
       </joint>
 
-      <gpio name="Tool">
-        <command_interface name="Tool"/>
-        <state_interface name="Tool"/>
-      </gpio>
 
     </ros2_control>
 

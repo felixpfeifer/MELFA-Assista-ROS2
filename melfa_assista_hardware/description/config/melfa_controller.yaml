@@ -1,5 +1,6 @@
 controller_manager:
   ros__parameters:
+  
     update_rate: 200  # Hz
 
     robot_controller:
@@ -28,5 +29,4 @@ robot_controller:
     state_publish_rate: 200.0
     action_monitor_rate: 20.0
 
-gpio_controller:  
   
