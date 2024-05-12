@@ -10,7 +10,7 @@ controller_manager:
       type: joint_state_broadcaster/JointStateBroadcaster
 
     gpio_controller:
-      type: melfa_assista_ros2_hw/GPIOController
+      type: melfa_assista_hardware/GPIOController
 
 robot_controller:
   ros__parameters:
@@ -29,4 +29,10 @@ robot_controller:
     state_publish_rate: 200.0
     action_monitor_rate: 20.0
 
+gpio_controller:
+  ros__parameters:
+    inputs:
+      - tool_flansch/coact
+    outputs:
+      - tool_flansch/coact
   

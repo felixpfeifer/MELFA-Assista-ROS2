@@ -124,6 +124,12 @@ def generate_launch_description():
         executable="spawner",
         arguments=["robot_controller", "--controller-manager", "/controller_manager"],
         )
+    
+    gpio_controller_spawner = Node(
+    package="controller_manager",
+    executable="spawner",
+    arguments=["gpio_controller", "-c", "/controller_manager"],
+    )
 
     # Delay start of robot_controller after `joint_state_broadcaster`
     delay_robot_controller_spawner_after_joint_state_broadcaster_spawner = RegisterEventHandler(
@@ -139,7 +145,8 @@ def generate_launch_description():
         robot_state_pub_node,
         delayed_controller_manager,
         joint_state_broadcaster_spawner,
-        robot_controller_spawner
+        gpio_controller_spawner,
+        robot_controller_spawner,
     ]
 
     

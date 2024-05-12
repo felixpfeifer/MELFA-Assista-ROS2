@@ -26,6 +26,12 @@
 #define _period 0.0071
 #define PORT 10000
 
+// Typedefs for the Tool/Gripper
+#define STARTINGBIT 900
+
+#define OPEN 0
+#define CLOSE 1
+
 using hardware_interface::return_type;
 using CallbackReturn = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
@@ -107,6 +113,9 @@ protected:
     /// The size of this vector is (standard_interfaces_.size() x nr_joints)
     std::vector<double> joint_position_command_; // Vector for the joint position command
     std::vector<double> joint_position_state_; // Vector for the joint position state
+    // Vectors for the Joints
+    std::vector<double> gpio_state_; // Vector for the gpio state
+    std::vector<double> gpio_command_; // Vector for the gpio command
 private:
     MXTCMD _send_buff; // Buffer for the Joint Position Command with the MXT-Command Packet
     MXTCMD _recv_buff; // Buffer for the Joint Position Position with the MXT-Command Packet

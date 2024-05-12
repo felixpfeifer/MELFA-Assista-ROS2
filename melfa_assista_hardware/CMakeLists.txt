@@ -12,10 +12,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(ament_cmake REQUIRED)
 # find dependencies
 set(THIS_PACKAGE_INCLUDE_DEPENDS
-        hardware_interface
-        pluginlib
-        rclcpp
-        rclcpp_lifecycle
+  hardware_interface
+  control_msgs
+  std_msgs
+  pluginlib
+  rclcpp
+  rclcpp_lifecycle
+  controller_interface
 )
 
 foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
@@ -31,6 +34,7 @@ add_library(
   ${PROJECT_NAME}
   SHARED
   src/melfa_assista_hardware_interface.cpp
+  controllers/gpio_controller.cpp
 )
 target_include_directories(
   ${PROJECT_NAME}
@@ -42,6 +46,7 @@ target_include_directories(
 target_compile_features(melfa_assista_hardware PUBLIC cxx_std_17)
 target_include_directories(melfa_assista_hardware PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/controllers/include>
         $<INSTALL_INTERFACE:include/melfa_assista_hardware>
 )
 ament_target_dependencies(
@@ -54,6 +59,7 @@ include_directories(
 )
 
 pluginlib_export_plugin_description_file(hardware_interface melfa_assista_hardware.xml)
+pluginlib_export_plugin_description_file(controller_interface melfa_assista_hardware.xml)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -74,7 +80,11 @@ install(
 )
 install(
   DIRECTORY include/
-  DESTINATION include
+  DESTINATION include/
+)
+install(
+  DIRECTORY controllers/include/
+  DESTINATION include/
 )
 install(
         DIRECTORY description/ros2_control description/urdf description/meshes description/config

@@ -14,6 +14,8 @@ CallbackReturn melfa_assista_hardware::MelfaHW::on_init(const hardware_interface
     // Set the to Vectors with 0 Values for each of the six Joints
     joint_position_state_.resize(6,0.0);
     joint_position_command_.resize(6,0.0);
+    //gpio_state_.resize(1,0);
+    //gpio_command_.resize(1,0);
     
 
     for(const hardware_interface::ComponentInfo &joint : info_.joints)
@@ -52,6 +54,32 @@ CallbackReturn melfa_assista_hardware::MelfaHW::on_init(const hardware_interface
         return CallbackReturn::ERROR;
         }
     }
+    //return CallbackReturn::SUCCESS;
+    // GPIO Initialization
+    if (info_.gpios.size() != 1)
+    {
+        RCLCPP_FATAL(_logger, "1 GPIOs expected, %d found", info_.gpios.size());
+        return CallbackReturn::ERROR;
+    }
+    
+    // With one Command and one State Interface
+    if (info_.gpios[0].command_interfaces.size() != 1)
+    {
+        RCLCPP_FATAL(
+            _logger,
+            "GPIO '%s' has %d command interfaces found. 1 expected.", info_.gpios[0].name.c_str(),
+            info_.gpios[0].command_interfaces.size());
+        return CallbackReturn::ERROR;
+    }
+    if (info_.gpios[0].state_interfaces.size() != 1)
+    {
+        RCLCPP_FATAL(
+            _logger,
+            "GPIO '%s' has %d state interfaces found. 1 expected.", info_.gpios[0].name.c_str(),
+            info_.gpios[0].state_interfaces.size());
+        return CallbackReturn::ERROR;
+    }
+
 
     return CallbackReturn::SUCCESS;
     }
@@ -65,6 +93,21 @@ std::vector<hardware_interface::StateInterface> melfa_assista_hardware::MelfaHW:
         info_.joints[i].name, hardware_interface::HW_IF_POSITION, &joint_position_state_[i]));
         RCLCPP_INFO(_logger,"Joint %s", info_.joints[i].name.c_str());
     }
+
+    size_t ct = 0;
+    gpio_state_.resize(info_.gpios.size());
+    for (size_t i = 0; i < info_.gpios.size(); i++)
+    {
+        for (auto state_if : info_.gpios.at(i).state_interfaces)
+        {
+        state_interfaces.emplace_back(hardware_interface::StateInterface(
+            info_.gpios.at(i).name, state_if.name, &gpio_state_[ct++]));
+        RCLCPP_INFO(
+            rclcpp::get_logger("GPIOController"), "Added %s/%s",
+            info_.gpios.at(i).name.c_str(), state_if.name.c_str());
+        }
+    }
+
     return state_interfaces;
 }
 
@@ -75,8 +118,22 @@ std::vector<hardware_interface::CommandInterface> melfa_assista_hardware::MelfaH
         command_interfaces.emplace_back(hardware_interface::CommandInterface(
         info_.joints[i].name, hardware_interface::HW_IF_POSITION, &joint_position_command_[i]));
     }
+    gpio_command_.resize(info_.gpios.size());
+    size_t ct = 0;
+    for (uint i = 0; i < info_.gpios.size(); i++)
+    {
+         for (auto command_if : info_.gpios.at(i).command_interfaces)
+         {
+            command_interfaces.emplace_back(hardware_interface::CommandInterface(
+                info_.gpios.at(i).name, command_if.name, &gpio_command_[ct++]));
+            RCLCPP_INFO(
+                rclcpp::get_logger("GPIOController"), "Added %s/%s",
+                info_.gpios.at(i).name.c_str(), command_if.name.c_str());
+        }
+    }
 
     return command_interfaces;
+
 }
 
 /**
@@ -91,11 +148,19 @@ return_type melfa_assista_hardware::MelfaHW::write(const rclcpp::Time &, const r
     _send_buff.SendType = MXT_TYP_JOINT;
     _send_buff.RecvType = MXT_TYP_JOINT;
 
-    _send_buff.SendIOType = MXT_IO_NULL;
-    _send_buff.RecvIOType = MXT_IO_NULL;
-    _send_buff.BitTop = 0;
-    _send_buff.BitMask = 0;
-    _send_buff.IoData = 0;
+    _send_buff.SendIOType = MXT_IO_OUT;
+    _send_buff.RecvIOType = MXT_IO_IN;
+    _send_buff.BitTop = STARTINGBIT; // First bit of the 16 Bits array
+    _send_buff.BitMask = ((1 << 1) | (1 << 0)); // Mask for the Databits of the 16 Bits, used are the first two
+    
+    if (gpio_command_[0] > 0.90) // Open
+    {
+        _send_buff.IoData = (0 << CLOSE | 1 << OPEN);
+    }
+    else // Close
+    {
+        _send_buff.IoData = (1 << CLOSE | 0 << OPEN);
+    }
     _send_buff.CCount = _counter;
 
     _send_buff.dat.jnt.j1 = (float)joint_position_command_[0];
@@ -106,6 +171,8 @@ return_type melfa_assista_hardware::MelfaHW::write(const rclcpp::Time &, const r
     _send_buff.dat.jnt.j6 = (float)joint_position_command_[5];
 
     int size = sendto (_socket, (char *) &_send_buff, sizeof (_send_buff), 0, (struct sockaddr *) &_addres, sizeof (_addres));
+    //TODO: Try to send the packet to the robot for 1000 trys then return ERROR
+
     if (size != sizeof (_send_buff))
     {
        std::cout << "Can't send to Controller" << "\n";
@@ -131,7 +198,16 @@ return_type melfa_assista_hardware::MelfaHW::read(const rclcpp::Time & /*time*/,
     joint_position_state_[3] = joints->j4;
     joint_position_state_[4] = joints->j5;
     joint_position_state_[5] = joints->j6;
-    std::cout << "Succesful get Postion  of the Robot" << "\n";
+    //std::cout << "Succesful get Postion  of the Robot" << "\n";
+    // Read Out the State of the Gripper
+    if (_recv_buff.IoData & (1 << OPEN))
+    {
+        gpio_state_[0] = 1.0;
+    }
+    else
+    {
+        gpio_state_[0] = 0.0;
+    }
 
     return return_type::OK;
 
@@ -152,7 +228,8 @@ CallbackReturn melfa_assista_hardware::MelfaHW::on_cleanup(const rclcpp_lifecycl
 CallbackReturn melfa_assista_hardware::MelfaHW::on_activate(const rclcpp_lifecycle::State &previous_state) {
 
 
-    
+    // TODO: Implement to check if the robot is connected
+    // TODO: Implement the R3 Automation Protocol to start the Robot remotely
 
     //return CallbackReturn::SUCCESS;
     _counter = 0;
@@ -192,13 +269,17 @@ CallbackReturn melfa_assista_hardware::MelfaHW::on_activate(const rclcpp_lifecyc
     _send_buff.Command = MXT_CMD_NULL;
     _send_buff.SendType = MXT_TYP_NULL;
     _send_buff.RecvType = MXT_TYP_JOINT;
-    _send_buff.SendIOType = MXT_IO_NULL;
-    _send_buff.RecvIOType = MXT_IO_NULL;
-    _send_buff.BitTop = 0;
-    _send_buff.BitMask = 0;
-    _send_buff.IoData = 0;
+    _send_buff.SendIOType = MXT_IO_OUT;
+    _send_buff.RecvIOType = MXT_IO_IN;
+    _send_buff.BitTop = STARTINGBIT; // First bit of the 16 Bits array
+    _send_buff.BitMask = ((1 << 1) | (1 << 0)); // Mask for the Databits of the 16 Bits, used are the first two
+    _send_buff.IoData = (0 << CLOSE | 1 << OPEN);
+
     _send_buff.CCount = _counter;
 
+    // Write GPIO Vectors
+    gpio_command_[0] = 1.0;
+    gpio_state_[0] = 1.0;
 
     auto size = sendto(_socket,&_send_buff,sizeof(_send_buff),NULL,(const struct sockaddr *) &_addres,sizeof(_addres));
     if (size != sizeof(_send_buff)){
@@ -228,10 +309,10 @@ CallbackReturn melfa_assista_hardware::MelfaHW::on_activate(const rclcpp_lifecyc
     joint_position_state_[3] = joints->j4;
     joint_position_state_[4] = joints->j5;
     joint_position_state_[5] = joints->j6;
-    std::cout << "Succesful get Postion to inital of the Robot" << "\n";
+    //std::cout << "Succesful get Postion to inital of the Robot" << "\n";
 
     joint_position_command_  =  joint_position_state_;
-    std::cout << "Succesful set Postion to inital of the Robot" << "\n";
+    //std::cout << "Succesful set Postion to inital of the Robot" << "\n";
 }
 
 CallbackReturn melfa_assista_hardware::MelfaHW::on_deactivate(const rclcpp_lifecycle::State &previous_state) {
