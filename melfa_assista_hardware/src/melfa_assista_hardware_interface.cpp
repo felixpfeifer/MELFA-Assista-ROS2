@@ -248,10 +248,12 @@ CallbackReturn melfa_assista_hardware::MelfaHW::on_activate(const rclcpp_lifecyc
 
     if(_socket < 0){
         std::cout << "Can't create a Socket" << "\n";
+        //return CallbackReturn::FAILURE;
     }
 
     if (int err = setsockopt(_socket, SOL_SOCKET, SO_RCVTIMEO,(char*)&_time,sizeof(_time))) {
         std::cout << "Cant set socket options" << "\n";
+        return CallbackReturn::FAILURE;
     }
 
     memset(&_addres,0,sizeof(_addres));
@@ -260,6 +262,7 @@ CallbackReturn melfa_assista_hardware::MelfaHW::on_activate(const rclcpp_lifecyc
     _addres.sin_addr.s_addr = inet_addr(_robot_ip.c_str());
     if (_addres.sin_addr.s_addr == INADDR_NONE) {
         std::cout << "IP Addres is not valid" << "\n";
+        return CallbackReturn::FAILURE;
     }
 
     // Packet to Send send_buffer
