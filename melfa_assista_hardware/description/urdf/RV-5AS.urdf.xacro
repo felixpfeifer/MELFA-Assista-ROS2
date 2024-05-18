@@ -8,19 +8,19 @@
 
 <xacro:include filename="$(find melfa_assista_hardware)/urdf/materials.xacro" />
 <xacro:include filename="$(find melfa_assista_hardware)/urdf/RV-5AS.gazebo" />
-<xacro:include filename="$(find melfa_assista_hardware)/urdf/Coact_w_Camera.xacro" />
+<xacro:include filename="$(find melfa_assista_hardware)/urdf/Coact_Schunk.xacro" />
+<xacro:include filename="$(find melfa_assista_hardware)/urdf/Camera.xacro" />
 
 <xacro:include filename="$(find melfa_assista_hardware)/ros2_control/melfa.ros2_control.xacro" />
 
 <!-- Enable Gazebo Plugins -->
   <gazebo>
-    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control.">
-      <!-- <robot_param>robot_description</robot_param>
-      <robot_param_node>robot_state_publisher</robot_param_node> -->
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control.so">
+      <robot_param>robot_description</robot_param>
+      <robot_param_node>robot_state_publisher</robot_param_node>
       <parameters>$(find melfa_assista_hardware)/config/melfa_controller.yaml</parameters>
     </plugin>
   </gazebo>
-
 
 <xacro:melfa_ros2_control name="melfaHW" robot_ip="$(arg robot_ip)"  use_sim="$(arg use_sim)" use_fake_hardware="$(arg use_fake_hardware)" />
 
