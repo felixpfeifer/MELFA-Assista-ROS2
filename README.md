@@ -2,5 +2,11 @@
 This package is part of my term paper at Heilbronn University
 
 # Parts Used in the Package
+- [Mitsubishi Electric – MELFA ASSISTA](https://de.mitsubishielectric.com/fa/products/rbt/assista)
 - Schunk Coact Assista Gripper
 - IDS Networking Camera
+
+# References
+[Gripper](https://schunk.com/de/de/greiftechnik/parallelgreifer/co-act-egp-c/co-act-egp-c-40-n-n-assista/p/000000000001408586)
+[Structure and Tutorials](https://articulatedrobotics.xyz/)
+
