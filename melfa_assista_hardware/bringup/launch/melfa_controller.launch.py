@@ -40,14 +40,14 @@ def generate_launch_description():
     declared_arguments = []
     declared_arguments.append(
         DeclareLaunchArgument(
-            'use_sim',
+            'sim_mode',
             default_value='false',
             description='Start robot in Gazebo simulation.',
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            'use_fake_hardware',
+            'use_mockup',
             default_value='true',
             description='Start robot with fake hardware mirroring command to its states.',
         )
@@ -55,14 +55,14 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             'robot_ip',
-            default_value='192.168.122.200',
+            default_value='127.0.0.1',
             description='Robot IP.',
         )
     )
 
     # Args to Vars
-    use_sim = LaunchConfiguration('use_sim')
-    use_fake_hardware = LaunchConfiguration('use_fake_hardware')
+    sim_mode = LaunchConfiguration('sim_mode')
+    use_mockup = LaunchConfiguration('use_mockup')
     robot_ip = LaunchConfiguration('robot_ip')
 
     urdf_command = Command(
@@ -76,8 +76,8 @@ def generate_launch_description():
                     "RV-5AS.urdf.xacro",
                 ]
             ),
-            " use_sim:=", use_sim,
-            " use_fake_hardware:=", use_fake_hardware,
+            " sim_mode:=", sim_mode,
+            " use_mockup:=", use_mockup,
             " robot_ip:=", robot_ip,
         ]
     )

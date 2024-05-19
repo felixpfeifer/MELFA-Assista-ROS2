@@ -13,17 +13,18 @@ import xacro
 def generate_launch_description():
 
     # Check if we're told to use sim time
-    use_sim = LaunchConfiguration('use_sim')
-    use_fake_hardware = LaunchConfiguration('use_fake_hardware')
+    sim_mode_time = LaunchConfiguration('sim_mode_time')
+    robot_ip = LaunchConfiguration('robot_ip')
+    use_mockup = LaunchConfiguration('use_mockup')
 
     # Process the URDF file
     pkg_path = os.path.join(get_package_share_directory('melfa_assista_hardware'))
-    xacro_file = os.path.join(pkg_path,'description','RV-5AS.urdf.xacro')
+    xacro_file = os.path.join(pkg_path,'urdf','robot.urdf.xacro')
     # robot_description_config = xacro.process_file(xacro_file).toxml()
-    robot_description_config = Command(['xacro ', xacro_file, ' use_fake_hardware:=', use_fake_hardware, ' use_sim:=', use_sim])
+    robot_description_config = Command(['xacro ', xacro_file, ' sim_mode:=', sim_mode_time, ' robot_ip:=', robot_ip,' use_mockup:=',use_mockup ,])
     
     # Create a robot_state_publisher node
-    params = {'robot_description': robot_description_config, 'use_fake_hardwarey': use_sim}
+    params = {'robot_description': robot_description_config, 'sim_mode_time': sim_mode_time}
     node_robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -35,13 +36,18 @@ def generate_launch_description():
     # Launch!
     return LaunchDescription([
         DeclareLaunchArgument(
-            'use_sim',
-            default_value='false',
-            description='Use sim time if true'),
-        DeclareLaunchArgument(
-            'use_fake_hardware',
+            'sim_mode_time',
             default_value='true',
-            description='Use ros2_control if true'),
+            description='Use sim time if true'),
+
+        DeclareLaunchArgument(
+            'robot_ip',
+            default_value='127.0.0.1',
+            description='Robot IP address'),
+        DeclareLaunchArgument(
+            'use_mockup',
+            default_value='true',
+            description='Use mockup if true'),
 
         node_robot_state_publisher
     ])
