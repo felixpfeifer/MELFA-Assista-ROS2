@@ -10,7 +10,7 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="package://melfa_assista_hardware/meshes/camera_adapter_link.STL" />
+                <mesh filename="file://$(find melfa_assista_hardware)/meshes/camera_adapter_link.STL" />
             </geometry>
             <material name="">
                 <color rgba="1 1 1 1" />
@@ -19,7 +19,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="package://melfa_assista_hardware/meshes/camera_adapter_link.STL" />
+                <mesh filename="file://$(find melfa_assista_hardware)/meshes/camera_adapter_link.STL" />
             </geometry>
         </collision>
     </link>
@@ -34,7 +34,7 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="package://melfa_assista_hardware/meshes/camera_link.STL" />
+                <mesh filename="file://$(find melfa_assista_hardware)/meshes/camera_link.STL" />
             </geometry>
             <material name="">
                 <color rgba="0.50196 0.50196 0.50196 1" />
@@ -43,7 +43,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
-                <mesh filename="package://melfa_assista_hardware/meshes/camera_link.STL" />
+                <mesh filename="file://$(find melfa_assista_hardware)/meshes/camera_link.STL" />
             </geometry>
         </collision>
     </link>
@@ -56,7 +56,7 @@
     </joint>
 
     <joint name="joint_camera" type="fixed">
-        <origin xyz="0 0.027 -0.0185" rpy="3.1416 0 3.1416" />
+        <origin xyz="0 0.027 -0.0185" rpy="${pi} 0 ${pi}" />
         <parent link="camera_adapter_link" />
         <child link="camera_link" />
         <axis xyz="0 0 0" />
@@ -66,12 +66,12 @@
     </link>
 
     <joint name="joint_camera_optical_frame" type="fixed">
-        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+        <origin xyz="0 0 0.06" rpy="-${pi/2} -${pi/2} 0"/>
         <parent link="camera_link" />
         <child link="camera_link_optical" />
     </joint>
 
-    <gazebo reference="camera_link">
+    <gazebo reference="camera_link_optical">
         <material>Gazebo/Black</material>
 
         <sensor name="camera" type="camera">

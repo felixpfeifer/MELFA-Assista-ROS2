@@ -26,7 +26,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://melfa_assista_hardware/meshes/coact_base_link.STL" />
+          filename="file://$(find melfa_assista_hardware)/meshes/coact_base_link.STL" />
       </geometry>
       <material
         name="">
@@ -40,7 +40,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://melfa_assista_hardware/meshes/coact_base_link.STL" />
+          filename="file://$(find melfa_assista_hardware)/meshes/coact_base_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -66,7 +66,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://melfa_assista_hardware/meshes/housing_link.STL" />
+          filename="file://$(find melfa_assista_hardware)/meshes/housing_link.STL" />
       </geometry>
       <material
         name="">
@@ -80,7 +80,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://melfa_assista_hardware/meshes/housing_link.STL" />
+          filename="file://$(find melfa_assista_hardware)/meshes/housing_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -119,7 +119,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://melfa_assista_hardware/meshes/hand_left_link.STL" />
+          filename="file://$(find melfa_assista_hardware)/meshes/hand_left_link.STL" />
       </geometry>
       <material
         name="">
@@ -133,7 +133,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://melfa_assista_hardware/meshes/hand_left_link.STL" />
+          filename="file://$(find melfa_assista_hardware)/meshes/hand_left_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -177,7 +177,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://melfa_assista_hardware/meshes/finger_left_link.STL" />
+          filename="file://$(find melfa_assista_hardware)/meshes/finger_left_link.STL" />
       </geometry>
       <material
         name="">
@@ -191,7 +191,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://melfa_assista_hardware/meshes/finger_left_link.STL" />
+          filename="file://$(find melfa_assista_hardware)/meshes/finger_left_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -230,7 +230,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://melfa_assista_hardware/meshes/hand_right_link.STL" />
+          filename="file://$(find melfa_assista_hardware)/meshes/hand_right_link.STL" />
       </geometry>
       <material
         name="">
@@ -244,7 +244,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://melfa_assista_hardware/meshes/hand_right_link.STL" />
+          filename="file://$(find melfa_assista_hardware)/meshes/hand_right_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -267,7 +267,7 @@
       velocity="1.0" />
     <mimic
       joint="joint_hand_left"
-      multiplier="-1"
+      multiplier="1"
       offset="0" />
   </joint>
   <link
@@ -292,7 +292,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://melfa_assista_hardware/meshes/finger_right_link.STL" />
+          filename="file://$(find melfa_assista_hardware)/meshes/finger_right_link.STL" />
       </geometry>
       <material
         name="">
@@ -306,7 +306,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://melfa_assista_hardware/meshes/finger_right_link.STL" />
+          filename="file://$(find melfa_assista_hardware)/meshes/finger_right_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -322,6 +322,13 @@
       link="finger_right_link" />
     <axis
       xyz="0 0 0" />
+  </joint>
+
+  <!-- Tool Joint Connection to the Robot -->
+  <joint name="joint_tool_robot" type="fixed">
+    <origin xyz="0.0 0.0 0.01" rpy="-${(pi/2)} 0.0 ${(pi/2)}"/>
+    <parent link="Link_6_1"/>
+    <child link="coact_base_link"/>
   </joint>
  
 </robot>

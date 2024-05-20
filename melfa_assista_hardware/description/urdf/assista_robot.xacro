@@ -1,31 +1,7 @@
 <?xml version="1.0" ?>
-<robot name="Assista" xmlns:xacro="http://www.ros.org/wiki/xacro">
-
-<!-- Enable setting arguments from the launch file -->
-<xacro:arg name="use_sim" default="false" />
-<xacro:arg name="use_fake_hardware" default="true" />
-<xacro:arg name="robot_ip" default="127.0.0.1" />
-
-<xacro:include filename="$(find melfa_assista_hardware)/urdf/materials.xacro" />
-<xacro:include filename="$(find melfa_assista_hardware)/urdf/RV-5AS.gazebo" />
-<xacro:include filename="$(find melfa_assista_hardware)/urdf/Coact_Schunk.xacro" />
-<xacro:include filename="$(find melfa_assista_hardware)/urdf/Camera.xacro" />
-
-<xacro:include filename="$(find melfa_assista_hardware)/ros2_control/melfa.ros2_control.xacro" />
-
-<!-- Enable Gazebo Plugins -->
-  <gazebo>
-    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control.so">
-      <robot_param>robot_description</robot_param>
-      <robot_param_node>robot_state_publisher</robot_param_node>
-      <parameters>$(find melfa_assista_hardware)/config/melfa_controller.yaml</parameters>
-    </plugin>
-  </gazebo>
-
-<xacro:melfa_ros2_control name="melfaHW" robot_ip="$(arg robot_ip)"  use_sim="$(arg use_sim)" use_fake_hardware="$(arg use_fake_hardware)" />
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <link name="world">
-  
 </link>
 
 <link name="base_link">
@@ -37,7 +13,7 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_assista_hardware/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/base_link.STL" scale="0.001 0.001 0.001"/>
       <cylinder radius="0.5" length="1.0"/>
     </geometry>
     <material name="silver"/>
@@ -45,7 +21,7 @@
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_assista_hardware/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/base_link.STL" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -59,14 +35,14 @@
   <visual>
     <origin xyz="-0.000321 -0.000483 -0.169215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_assista_hardware/meshes/Link_1_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/Link_1_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.000321 -0.000483 -0.169215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_assista_hardware/meshes/Link_1_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/Link_1_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -80,14 +56,14 @@
   <visual>
     <origin xyz="-0.000321 -0.091983 -0.252215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_assista_hardware/meshes/Link_2_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/Link_2_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.000321 -0.091983 -0.252215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_assista_hardware/meshes/Link_2_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/Link_2_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -101,14 +77,14 @@
   <visual>
     <origin xyz="-0.000321 -0.091983 -0.662215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_assista_hardware/meshes/Link_3_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/Link_3_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.000321 -0.091983 -0.662215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_assista_hardware/meshes/Link_3_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/Link_3_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -122,14 +98,14 @@
   <visual>
     <origin xyz="-0.000488 -0.000483 -0.819715" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_assista_hardware/meshes/Link_4_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/Link_4_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.000488 -0.000483 -0.819715" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_assista_hardware/meshes/Link_4_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/Link_4_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -143,14 +119,14 @@
   <visual>
     <origin xyz="-0.000488 0.051017 -1.165215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_assista_hardware/meshes/Link_5_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/Link_5_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.000488 0.051017 -1.165215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_assista_hardware/meshes/Link_5_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/Link_5_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
@@ -164,20 +140,20 @@
   <visual>
     <origin xyz="-0.000317 -0.001983 -1.271215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_assista_hardware/meshes/Link_6_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/Link_6_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
     <material name="silver"/>
   </visual>
   <collision>
     <origin xyz="-0.000317 -0.001983 -1.271215" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="package://melfa_assista_hardware/meshes/Link_6_1.stl" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/Link_6_1.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
 
 <joint name="joint_0" type="fixed">
-  <origin xyz="0 0 0" rpy="0 0 0"/>
+  <origin xyz="0 0 0.001" rpy="0 0 0"/>
   <parent link="world"/>
   <child link="base_link"/>
   </joint>
@@ -187,6 +163,7 @@
   <parent link="base_link"/>
   <child link="Link_1_1"/>
   <axis xyz="0.0 0.0 1.0"/>
+  
   <limit lower="${-(240 * pi)/180}" upper="${(240 * pi)/180}" effort="1000" velocity="${(124*pi)/180}"/>
 </joint>
 
@@ -195,6 +172,7 @@
   <parent link="Link_1_1"/>
   <child link="Link_2_1"/>
   <axis xyz="0.0 1.0 -0.0"/>
+  
   <limit lower="${-(148 * pi)/180}" upper="${(148 * pi)/180}" effort="1000" velocity="${(124*pi)/180}"/>
 </joint>
 
@@ -203,6 +181,7 @@
   <parent link="Link_2_1"/>
   <child link="Link_3_1"/>
   <axis xyz="-0.0 1.0 0.0"/>
+  
   <limit lower="${-(150 * pi)/180}" upper="${(150 * pi)/180}" effort="1000" velocity="${(124*pi)/180}"/>
 </joint>
 
@@ -211,6 +190,7 @@
   <parent link="Link_3_1"/>
   <child link="Link_4_1"/>
   <axis xyz="0.0 0.0 1.0"/>
+  
   <limit lower="${-(200 * pi)/180}" upper="${(200 * pi)/180}" effort="1000" velocity="${(124*pi)/180}"/>
 </joint>
 
@@ -219,6 +199,7 @@
   <parent link="Link_4_1"/>
   <child link="Link_5_1"/>
   <axis xyz="0.0 1.0 -0.0"/>
+  
   <limit lower="${-(120 * pi)/180}" upper="${(120 * pi)/180}" effort="1000" velocity="${(356*pi)/180}"/>
 </joint>
 
@@ -227,14 +208,12 @@
   <parent link="Link_5_1"/>
   <child link="Link_6_1"/>
   <axis xyz="0.0 0.0 1.0"/>
+  
   <limit lower="${-(200 * pi)/180}" upper="${(200 * pi)/180}" effort="1000" velocity="${(360*pi)/180}"/>
 </joint>
 
-<!-- Tool Joint Connection to the Robot -->
-<joint name="joint_tool_robot" type="fixed">
-  <origin xyz="0.0 0.0 0.01" rpy="-${(pi/2)} 0.0 ${(pi/2)}"/>
-  <parent link="Link_6_1"/>
-  <child link="coact_base_link"/>
-</joint>
+
+
+
 
 </robot>

@@ -87,7 +87,7 @@ install(
   DESTINATION include/
 )
 install(
-        DIRECTORY description/ros2_control description/urdf description/meshes description/config
+        DIRECTORY description/urdf description/meshes bringup/config
         DESTINATION share/melfa_assista_hardware
 )
 
