@@ -19,7 +19,6 @@ from launch.actions import DeclareLaunchArgument, RegisterEventHandler
 from launch.conditions import IfCondition
 from launch.event_handlers import OnProcessExit
 from launch.substitutions import Command, FindExecutable, LaunchConfiguration, PathJoinSubstitution
-
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from ament_index_python.packages import get_package_share_directory
@@ -28,68 +27,23 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command
 from launch.actions import RegisterEventHandler
 from launch.event_handlers import OnProcessStart
-
 from launch_ros.actions import Node
-
-
-
 
 def generate_launch_description():
 
-    #Declare Args
-    declared_arguments = []
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            'sim_mode',
-            default_value='false',
-            description='Start robot in Gazebo simulation.',
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            'use_mockup',
-            default_value='true',
-            description='Start robot with fake hardware mirroring command to its states.',
-        )
-    )
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            'robot_ip',
-            default_value='127.0.0.1',
-            description='Robot IP.',
-        )
-    )
-
-    # Args to Vars
-    sim_mode = LaunchConfiguration('sim_mode')
-    use_mockup = LaunchConfiguration('use_mockup')
     robot_ip = LaunchConfiguration('robot_ip')
 
-    urdf_command = Command(
-        [
-            FindExecutable(name="xacro"),
-            " ",
-            PathJoinSubstitution(
-                [
-                    FindPackageShare("melfa_assista_hardware"),
-                    "urdf",
-                    "RV-5AS.urdf.xacro",
-                ]
-            ),
-            " sim_mode:=", sim_mode,
-            " use_mockup:=", use_mockup,
-            " robot_ip:=", robot_ip,
-        ]
+
+    package_name='melfa_assista_hardware' #<--- CHANGE ME
+
+    rsp = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory(package_name),'launch','rsp.launch.py'
+                )]), launch_arguments={'use_sim_time': 'false',"robot_ip" : robot_ip}.items()
     )
 
-    # Hinweis: Hier wird der Befehl direkt als Teil des Parameters verwendet.
-    robot_state_pub_node = Node(
-        package="robot_state_publisher",
-        executable="robot_state_publisher",
-        output="both",
-        parameters=[{"robot_description": urdf_command}],
-    )
-
+    robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
+    
     robot_controllers_file = PathJoinSubstitution(
         [
             FindPackageShare("melfa_assista_hardware"),
@@ -97,16 +51,15 @@ def generate_launch_description():
             "melfa_controller.yaml",
         ]
     )
-
-
-    control_node = Node(
+    
+    controller_manager = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[{"robot_description": urdf_command},robot_controllers_file],
-        output="both",
+        parameters=[{'robot_description': robot_description},
+                    robot_controllers_file]
     )
 
-    delayed_controller_manager = TimerAction(period=3.0, actions=[control_node])
+    delayed_controller_manager = TimerAction(period=3.0, actions=[controller_manager])
 
 
     joint_state_broadcaster_spawner = Node(
@@ -126,29 +79,23 @@ def generate_launch_description():
         )
     
     gpio_controller_spawner = Node(
-    package="controller_manager",
-    executable="spawner",
-    arguments=["gpio_controller", "-c", "/controller_manager"],
+        package="controller_manager",
+        executable="spawner",
+        arguments=["gpio_controller", "-c", "/controller_manager"],
     )
-
-    # Delay start of robot_controller after `joint_state_broadcaster`
-    delay_robot_controller_spawner_after_joint_state_broadcaster_spawner = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=control_node,
-            on_exit=[robot_controller_spawner],
-        )
-    )
-
 
     nodes = [
-        
-        robot_state_pub_node,
+        #Declare Args
+        DeclareLaunchArgument(
+            'robot_ip',
+            default_value='127.0.0.1',
+            description='Robot IP.',
+        ),
+        rsp,
         delayed_controller_manager,
+        robot_controller_spawner,
         joint_state_broadcaster_spawner,
         gpio_controller_spawner,
-        robot_controller_spawner,
     ]
-
-    
 
     return LaunchDescription(nodes)

@@ -42,11 +42,7 @@ def generate_launch_description():
                                    '-entity', 'Assista_Bot'],
                         output='screen')
 
-    delayed_controller_manager = TimerAction(period=10.0, actions=[spawn_entity])
-
-  
-    
-    diff_drive_spawner = Node(
+    robot_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["robot_controller"],
@@ -73,7 +69,7 @@ def generate_launch_description():
     delayed_diff_drive_spawner = RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=spawn_entity,
-            on_exit=[diff_drive_spawner],
+            on_exit=[robot_controller_spawner],
         )
     )
 
@@ -91,7 +87,7 @@ def generate_launch_description():
     return LaunchDescription([
         rsp,
         gazebo,
-        delayed_controller_manager,
+        spawn_entity,
         delayed_diff_drive_spawner,
         delayed_joint_broad_spawner,
     ])

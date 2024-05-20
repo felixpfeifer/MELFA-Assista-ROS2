@@ -46,7 +46,7 @@ def generate_launch_description():
             description='Robot IP address'),
         DeclareLaunchArgument(
             'use_mockup',
-            default_value='true',
+            default_value='false',
             description='Use mockup if true'),
 
         node_robot_state_publisher

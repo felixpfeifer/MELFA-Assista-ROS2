@@ -13,7 +13,7 @@
   <visual>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find melfa_assista_hardware)/meshes/base_link.STL" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       <cylinder radius="0.5" length="1.0"/>
     </geometry>
     <material name="silver"/>
@@ -21,7 +21,7 @@
   <collision>
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <geometry>
-      <mesh filename="file://$(find melfa_assista_hardware)/meshes/base_link.STL" scale="0.001 0.001 0.001"/>
+      <mesh filename="file://$(find melfa_assista_hardware)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
     </geometry>
   </collision>
 </link>
