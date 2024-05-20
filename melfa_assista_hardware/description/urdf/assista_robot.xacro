@@ -153,7 +153,7 @@
 </link>
 
 <joint name="joint_0" type="fixed">
-  <origin xyz="0 0 0" rpy="0 0 0"/>
+  <origin xyz="0 0 0.001" rpy="0 0 0"/>
   <parent link="world"/>
   <child link="base_link"/>
   </joint>
