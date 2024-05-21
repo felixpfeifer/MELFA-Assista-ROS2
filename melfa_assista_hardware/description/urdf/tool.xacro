@@ -137,9 +137,7 @@
       </geometry>
     </collision>
   </link>
-  <joint
-    name="joint_hand_left"
-    type="prismatic">
+  <joint name="joint_hand_left" type="prismatic">
     <origin
       xyz="0 0 0.0122"
       rpy="1.5708 0 0" />

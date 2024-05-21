@@ -112,10 +112,13 @@
     </ros2_control>
 
   <!-- Enable Gazebo Plugins -->
-  <gazebo>
-    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-      <parameters>$(find melfa_assista_hardware)/config/melfa_controller.yaml</parameters>
-    </plugin>
-  </gazebo>
+ 
 
+  <xacro:if value="$(arg sim_mode)">
+    <gazebo>
+      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+        <parameters>$(find melfa_assista_hardware)/config/melfa_controller.yaml</parameters>
+      </plugin>
+    </gazebo>
+  </xacro:if>
 </robot>
