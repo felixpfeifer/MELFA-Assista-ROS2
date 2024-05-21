@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by
+Stephen Brawner (brawner@gmail.com) 
      Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
-  <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
   <link
     name="coact_base_link">
     <inertial>
@@ -247,7 +248,7 @@
     </collision>
   </link>
   <joint
-    name="hand_right_joint"
+    name="joint_hand_right"
     type="prismatic">
     <origin
       xyz="0 0 0.0122"
@@ -263,10 +264,7 @@
       upper="0.006"
       effort="200"
       velocity="1.0" />
-    <mimic
-      joint="joint_hand_left"
-      multiplier="-1"
-      offset="0" />
+    <mimic joint="joint_hand_left" />
   </joint>
   <link
     name="finger_right_link">
@@ -324,9 +322,9 @@
 
   <!-- Tool Joint Connection to the Robot -->
   <joint name="joint_tool_robot" type="fixed">
-    <origin xyz="0.0 0.0 0.01" rpy="-${(pi/2)} 0.0 ${(pi/2)}"/>
-    <parent link="Link_6_1"/>
-    <child link="coact_base_link"/>
+    <origin xyz="0.0 0.0 0.01" rpy="-${(pi/2)} 0.0 ${(pi/2)}" />
+    <parent link="Link_6_1" />
+    <child link="coact_base_link" />
   </joint>
- 
+
 </robot>
