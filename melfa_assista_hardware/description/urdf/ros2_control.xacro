@@ -8,19 +8,21 @@
           <plugin>gazebo_ros2_control/GazeboSystem</plugin>
         </hardware>
       </xacro:if>
-
-      <xacro:if value="$(arg use_mockup)">
-        <hardware>
-          <plugin>fake_components/GenericSystem</plugin>
-          <param name="state_following_offset">0.0</param>
-        </hardware>
-      </xacro:if>
-      <xacro:unless value="$(arg use_mockup)">
-        <hardware>
-          <plugin>melfa_assista_hardware/MelfaHW</plugin>
-          <param name="robot_ip">"$(arg robot_ip)"</param>
-        </hardware>
+      <xacro:unless value="$(arg sim_mode)">
+        <xacro:if value="$(arg use_mockup)">
+          <hardware>
+            <plugin>fake_components/GenericSystem</plugin>
+            <param name="state_following_offset">0.0</param>
+          </hardware>
+        </xacro:if>
+        <xacro:unless value="$(arg use_mockup)">
+          <hardware>
+            <plugin>melfa_assista_hardware/MelfaHW</plugin>
+            <param name="robot_ip">"$(arg robot_ip)"</param>
+          </hardware>
+        </xacro:unless>
       </xacro:unless>
+     
 
       <joint name="joint_1">
         <param name="initial_value">0.0</param>
@@ -80,6 +82,18 @@
         </command_interface>
 
         <state_interface name="position" />
+
+      </joint>
+
+      <joint name="joint_hand_left">
+        <param name="initial_value">0.0</param>
+        <command_interface name="position">
+          <param name="min">0</param>
+          <param name="max">0.006</param>
+        </command_interface>
+
+        <state_interface name="position" />
+        <state_interface name="velocity"/>
 
       </joint>
       

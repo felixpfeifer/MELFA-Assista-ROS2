@@ -54,6 +54,11 @@ def generate_launch_description():
         arguments=["joint_state_broadcaster"],
     )
 
+    gpio_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["gripper_action_controller"],
+    )
 
     # Code for delaying a node (I haven't tested how effective it is)
     # 
@@ -80,6 +85,13 @@ def generate_launch_description():
         )
     )
 
+    delayed_gpio_controller_spawner = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=spawn_entity,
+            on_exit=[gpio_controller_spawner],
+        )
+    )
+
 
 
 
@@ -90,4 +102,5 @@ def generate_launch_description():
         spawn_entity,
         delayed_diff_drive_spawner,
         delayed_joint_broad_spawner,
+        delayed_gpio_controller_spawner,
     ])
