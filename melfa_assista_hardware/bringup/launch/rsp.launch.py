@@ -37,7 +37,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument(
             'sim_mode_time',
-            default_value='false',
+            default_value='true',
             description='Use sim time if true'),
 
         DeclareLaunchArgument(

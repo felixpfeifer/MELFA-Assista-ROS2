@@ -265,7 +265,7 @@
       velocity="1.0" />
     <mimic
       joint="joint_hand_left"
-      multiplier="1"
+      multiplier="-1"
       offset="0" />
   </joint>
   <link
