@@ -1,4 +1,4 @@
-# Default initial positions for Assista's ros2_control fake system
+# Default initial positions for robot's ros2_control fake system
 
 initial_positions:
   joint_1: 0
@@ -7,3 +7,4 @@ initial_positions:
   joint_4: 0
   joint_5: 0
   joint_6: 0
+  joint_hand_left: 0

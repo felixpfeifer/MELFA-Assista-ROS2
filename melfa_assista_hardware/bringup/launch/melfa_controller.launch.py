@@ -1,17 +1,3 @@
-# Copyright 2023 ros2_control Development Team
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import os
 
 from launch import LaunchDescription
@@ -29,21 +15,20 @@ from launch.actions import RegisterEventHandler
 from launch.event_handlers import OnProcessStart
 from launch_ros.actions import Node
 
-def generate_launch_description():
 
+def generate_launch_description():
     robot_ip = LaunchConfiguration('robot_ip')
 
-
-    package_name='melfa_assista_hardware' #<--- CHANGE ME
+    package_name = 'melfa_assista_hardware'  # <--- CHANGE ME
 
     rsp = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory(package_name),'launch','rsp.launch.py'
-                )]), launch_arguments={'sim_mode_time': 'false',"robot_ip" : robot_ip}.items()
+        PythonLaunchDescriptionSource([os.path.join(
+            get_package_share_directory(package_name), 'launch', 'rsp.launch.py'
+        )]), launch_arguments={'sim_mode_time': 'false', "robot_ip": robot_ip}.items()
     )
 
     robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
-    
+
     robot_controllers_file = PathJoinSubstitution(
         [
             FindPackageShare("melfa_assista_hardware"),
@@ -51,7 +36,7 @@ def generate_launch_description():
             "melfa_controller.yaml",
         ]
     )
-    
+
     controller_manager = Node(
         package="controller_manager",
         executable="ros2_control_node",
@@ -61,38 +46,43 @@ def generate_launch_description():
 
     delayed_controller_manager = TimerAction(period=3.0, actions=[controller_manager])
 
-
     joint_state_broadcaster_spawner = Node(
-        # The joint_state_broadcaster is necessary for the controller_manager to work
-        # It publishes the joint states of the robot to the controller_manager
         package="controller_manager",
         executable="spawner",
         arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+        output="screen",
     )
 
     robot_controller_spawner = Node(
-        # The robot_controller_spawner is used to start the joint_trajectory_controller
-    
         package="controller_manager",
         executable="spawner",
         arguments=["robot_controller", "--controller-manager", "/controller_manager"],
-        )
-    
+        output="screen",
+    )
+
     gpio_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["gpio_controller", "-c", "/controller_manager"],
+        arguments=["gpio_controller", "--controller-manager", "/controller_manager", '--ros-args', '--log-level',
+                   'INFO'],
+        output="screen",
     )
 
     gripper_action_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["gripper_action_controller"],
+        arguments=["gripper_action_controller", "--controller-manager", "/controller_manager"],
+        output="screen",
     )
 
+    gpio2gripper_action_spawner = Node(
+        package="melfa_assista_hardware",
+        executable="GPIOGripperActionClient",
+        output="screen",
+    )
 
     nodes = [
-        #Declare Args
+        # Declare Args
         DeclareLaunchArgument(
             'robot_ip',
             default_value='127.0.0.1',
@@ -102,8 +92,9 @@ def generate_launch_description():
         delayed_controller_manager,
         robot_controller_spawner,
         joint_state_broadcaster_spawner,
-        gpio_controller_spawner,
         gripper_action_controller_spawner,
+        gpio_controller_spawner,
+        gpio2gripper_action_spawner,
     ]
 
     return LaunchDescription(nodes)
