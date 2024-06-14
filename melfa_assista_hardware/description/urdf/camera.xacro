@@ -1,75 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <link name="camera_adapter_link">
-        <inertial>
-            <origin xyz="6.8987E-05 6.8987E-05 0.0086472" rpy="0 0 0" />
-            <mass value="0.11061" />
-            <inertia ixx="0.00011703" ixy="-7.4547E-10" ixz="3.2264E-07" iyy="0.00012118"
-                iyz="-6.0814E-08" izz="2.26E-05" />
-        </inertial>
-        <visual>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <geometry>
-                <mesh filename="file://$(find melfa_assista_hardware)/meshes/camera_adapter_link.stl" />
-            </geometry>
-            <material name="">
-                <color rgba="1 1 1 1" />
-            </material>
-        </visual>
-        <collision>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <geometry>
-                <mesh filename="file://$(find melfa_assista_hardware)/meshes/camera_adapter_link.stl" />
-            </geometry>
-        </collision>
-    </link>
+  <link
+  name="camera_adapter_link">
+  <inertial>
+    <origin
+      xyz="-0.026 -0.022971 -1.0408E-17"
+      rpy="0 0 0" />
+    <mass
+      value="0.16292" />
+    <inertia
+      ixx="6.5111E-05"
+      ixy="-2.7068E-05"
+      ixz="-5.9292E-21"
+      iyy="3.0709E-05"
+      iyz="-9.3174E-21"
+      izz="7.4701E-05" />
+  </inertial>
+  <visual>
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <geometry>
+      <mesh
+        filename="file://$(find melfa_assista_hardware)/meshes/camera_adapter_link.stl" />
+    </geometry>
+    <material
+      name="">
+      <color
+        rgba="0.64706 0.61961 0.58824 1" />
+    </material>
+  </visual>
+  <collision>
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <geometry>
+      <mesh
+        filename="file://$(find melfa_assista_hardware)/meshes/camera_adapter_link.stl" />
+    </geometry>
+  </collision>
+</link>
+<joint
+  name="camera_adapter_joint"
+  type="fixed">
+  <origin
+    xyz="0.033234 0.033234 -0.0041"
+    rpy="-1.5708 0 -2.3562" />
+  <parent
+    link="coact_base_link" />
+  <child
+    link="camera_adapter_link" />
+  <axis
+    xyz="0 0 0" />
+</joint>
+<link
+  name="camera_link">
+  <inertial>
+    <origin
+      xyz="-6.8696E-07 -0.00043025 0.03599"
+      rpy="0 0 0" />
+    <mass
+      value="0.13788" />
+    <inertia
+      ixx="8.1425E-05"
+      ixy="-1.5749E-10"
+      ixz="1.2373E-08"
+      iyy="8.2407E-05"
+      iyz="9.6107E-07"
+      izz="4.3666E-05" />
+  </inertial>
+  <visual>
+    <origin
+      xyz="0 0 0"
+      rpy="0 ${(pi)} ${(pi)}" />
+    <geometry>
+      <mesh
+        filename="file://$(find melfa_assista_hardware)/meshes/camera_link.stl" />
+    </geometry>
+    <material
+      name="">
+      <color
+        rgba="0.74902 0.74902 0.74902 1" />
+    </material>
+  </visual>
+  <collision>
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <geometry>
+      <mesh
+        filename="file://$(find melfa_assista_hardware)/meshes/camera_link.stl" />
+    </geometry>
+  </collision>
+</link>
+<joint
+  name="camera_joint"
+  type="fixed">
+  <origin
+    xyz="-0.067443 -0.054897 0"
+    rpy="${-(1.3937) + pi} 1.5708 0" />
+  <parent
+    link="camera_adapter_link" />
+  <child
+    link="camera_link" />
+  <axis
+    xyz="0 0 0" />
+</joint>
 
-    <link name="camera_link">
-        <inertial>
-            <origin xyz="6.8987E-05 8.2543E-06 0.0086472" rpy="0 0 0" />
-            <mass value="0.11061" />
-            <inertia ixx="0.00011703" ixy="-7.4547E-10" ixz="3.2264E-07" iyy="0.00012118"
-                iyz="-6.0814E-08" izz="2.26E-05" />
-        </inertial>
-        <visual>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <geometry>
-                <mesh filename="file://$(find melfa_assista_hardware)/meshes/camera_link.stl" />
-            </geometry>
-            <material name="">
-                <color rgba="0.50196 0.50196 0.50196 1" />
-            </material>
-        </visual>
-        <collision>
-            <origin xyz="0 0 0" rpy="0 0 0" />
-            <geometry>
-                <mesh filename="file://$(find melfa_assista_hardware)/meshes/camera_link.stl" />
-            </geometry>
-        </collision>
-    </link>
+<link name="camera_tcp">
+  
+</link>
 
-    <joint name="joint_camera_adapter" type="fixed">
-        <origin xyz="-0.00275 -0.0425 -0.04425" rpy="-1.5708 0 0" />
-        <parent link="coact_base_link" />
-        <child link="camera_adapter_link" />
-        <axis xyz="0 0 0" />
-    </joint>
-
-    <joint name="joint_camera" type="fixed">
-        <origin xyz="0 0.027 -0.0185" rpy="${pi} 0 ${pi}" />
-        <parent link="camera_adapter_link" />
-        <child link="camera_link" />
-        <axis xyz="0 0 0" />
-    </joint>
-
-    <link name="camera_link_optical">
-    </link>
-
-    <joint name="joint_camera_optical_frame" type="fixed">
-        <origin xyz="0 0 0.06" rpy="-${pi/2} -${pi/2} 0"/>
-        <parent link="camera_link" />
-        <child link="camera_link_optical" />
-    </joint>
+<joint name="camera_tcp_joint" type="fixed">
+  <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+  <parent link="camera_link"/>
+  <child link="camera_tcp"/>
+ 
+</joint>
 
     <gazebo reference="camera_link_optical">
         <material>Gazebo/Black</material>

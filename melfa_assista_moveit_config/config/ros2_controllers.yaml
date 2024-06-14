@@ -6,7 +6,6 @@ controller_manager:
     robot_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
-
     gripper_action_controller_controller:
       type: position_controllers/GripperActionController
 
@@ -24,9 +23,10 @@ robot_controller:
       - joint_5
       - joint_6
     command_interfaces:
-      []
+      - position
     state_interfaces:
-      []
+      - position
+      - velocity
 gripper_action_controller_controller:
   ros__parameters:
     joint: joint_hand_left

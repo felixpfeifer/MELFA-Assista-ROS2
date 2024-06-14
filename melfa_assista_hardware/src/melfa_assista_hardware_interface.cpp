@@ -49,6 +49,7 @@ CallbackReturn melfa_assista_hardware::MelfaHW::on_init(const hardware_interface
                 return CallbackReturn::ERROR;
             }
 
+
             if (joint.state_interfaces.size() != 2) {
                 RCLCPP_FATAL(
                         _logger,

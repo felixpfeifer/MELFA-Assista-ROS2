@@ -19,8 +19,14 @@
         <joint name="joint_5"/>
         <joint name="joint_6"/>
     </group>
+    <group name="camera">
+        <joint name="coact_base_joint"/>
+        <joint name="camera_adapter_joint"/>
+        <joint name="camera_joint"/>
+        <joint name="camera_tcp_joint"/>
+    </group>
     <group name="gripper_action_controller">
-        <joint name="joint_tool_robot"/>
+        <joint name="coact_base_joint"/>
         <joint name="housing_joint"/>
         <joint name="joint_hand_left"/>
         <joint name="finger_left_joint"/>
@@ -37,16 +43,19 @@
         <joint name="joint_5" value="0"/>
         <joint name="joint_6" value="0"/>
     </group_state>
+
     <group_state name="home" group="robot">
         <joint name="joint_1" value="0"/>
         <joint name="joint_2" value="0"/>
         <joint name="joint_3" value="1.57"/>
         <joint name="joint_4" value="0"/>
         <joint name="joint_5" value="1.57"/>
-        <joint name="joint_6" value="-1.57"/>
+        <joint name="joint_6" value="0"/>
     </group_state>
+  
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="gripper_coact" parent_link="Link_6_1" group="gripper_action_controller" parent_group="robot"/>
+    <end_effector name="sensopart_camera" parent_link="Link_6_1" group="camera" parent_group="robot"/>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
     <virtual_joint name="virtual_joint" type="fixed" parent_frame="world" child_link="world"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
@@ -70,7 +79,7 @@
     <disable_collisions link1="Link_3_1" link2="camera_link" reason="Never"/>
     <disable_collisions link1="Link_3_1" link2="coact_base_link" reason="Never"/>
     <disable_collisions link1="Link_3_1" link2="finger_left_link" reason="Never"/>
-    <disable_collisions link1="Link_3_1" link2="finger_right_link" reason="Never"/>
+    <disable_collisions link1="Link_3_1" link2="finger_right_joint" reason="Never"/>
     <disable_collisions link1="Link_3_1" link2="hand_left_link" reason="Never"/>
     <disable_collisions link1="Link_3_1" link2="hand_right_link" reason="Never"/>
     <disable_collisions link1="Link_3_1" link2="housing_link" reason="Never"/>
@@ -80,7 +89,7 @@
     <disable_collisions link1="Link_4_1" link2="camera_link" reason="Never"/>
     <disable_collisions link1="Link_4_1" link2="coact_base_link" reason="Never"/>
     <disable_collisions link1="Link_4_1" link2="finger_left_link" reason="Never"/>
-    <disable_collisions link1="Link_4_1" link2="finger_right_link" reason="Never"/>
+    <disable_collisions link1="Link_4_1" link2="finger_right_joint" reason="Never"/>
     <disable_collisions link1="Link_4_1" link2="hand_left_link" reason="Never"/>
     <disable_collisions link1="Link_4_1" link2="hand_right_link" reason="Never"/>
     <disable_collisions link1="Link_4_1" link2="housing_link" reason="Never"/>
@@ -89,7 +98,7 @@
     <disable_collisions link1="Link_5_1" link2="camera_link" reason="Never"/>
     <disable_collisions link1="Link_5_1" link2="coact_base_link" reason="Never"/>
     <disable_collisions link1="Link_5_1" link2="finger_left_link" reason="Never"/>
-    <disable_collisions link1="Link_5_1" link2="finger_right_link" reason="Never"/>
+    <disable_collisions link1="Link_5_1" link2="finger_right_joint" reason="Never"/>
     <disable_collisions link1="Link_5_1" link2="hand_left_link" reason="Never"/>
     <disable_collisions link1="Link_5_1" link2="hand_right_link" reason="Never"/>
     <disable_collisions link1="Link_5_1" link2="housing_link" reason="Never"/>
@@ -97,35 +106,35 @@
     <disable_collisions link1="Link_6_1" link2="camera_link" reason="Never"/>
     <disable_collisions link1="Link_6_1" link2="coact_base_link" reason="Adjacent"/>
     <disable_collisions link1="Link_6_1" link2="finger_left_link" reason="Never"/>
-    <disable_collisions link1="Link_6_1" link2="finger_right_link" reason="Never"/>
+    <disable_collisions link1="Link_6_1" link2="finger_right_joint" reason="Never"/>
     <disable_collisions link1="Link_6_1" link2="hand_left_link" reason="Never"/>
     <disable_collisions link1="Link_6_1" link2="hand_right_link" reason="Never"/>
     <disable_collisions link1="Link_6_1" link2="housing_link" reason="Never"/>
     <disable_collisions link1="camera_adapter_link" link2="camera_link" reason="Adjacent"/>
     <disable_collisions link1="camera_adapter_link" link2="coact_base_link" reason="Adjacent"/>
     <disable_collisions link1="camera_adapter_link" link2="finger_left_link" reason="Never"/>
-    <disable_collisions link1="camera_adapter_link" link2="finger_right_link" reason="Never"/>
+    <disable_collisions link1="camera_adapter_link" link2="finger_right_joint" reason="Never"/>
     <disable_collisions link1="camera_adapter_link" link2="hand_left_link" reason="Never"/>
     <disable_collisions link1="camera_adapter_link" link2="hand_right_link" reason="Never"/>
     <disable_collisions link1="camera_adapter_link" link2="housing_link" reason="Never"/>
     <disable_collisions link1="camera_link" link2="coact_base_link" reason="Never"/>
     <disable_collisions link1="camera_link" link2="finger_left_link" reason="Never"/>
-    <disable_collisions link1="camera_link" link2="finger_right_link" reason="Never"/>
+    <disable_collisions link1="camera_link" link2="finger_right_joint" reason="Never"/>
     <disable_collisions link1="camera_link" link2="hand_left_link" reason="Never"/>
     <disable_collisions link1="camera_link" link2="hand_right_link" reason="Never"/>
     <disable_collisions link1="camera_link" link2="housing_link" reason="Never"/>
     <disable_collisions link1="coact_base_link" link2="finger_left_link" reason="Never"/>
-    <disable_collisions link1="coact_base_link" link2="finger_right_link" reason="Never"/>
+    <disable_collisions link1="coact_base_link" link2="finger_right_joint" reason="Never"/>
     <disable_collisions link1="coact_base_link" link2="hand_left_link" reason="Never"/>
     <disable_collisions link1="coact_base_link" link2="hand_right_link" reason="Never"/>
     <disable_collisions link1="coact_base_link" link2="housing_link" reason="Adjacent"/>
-    <disable_collisions link1="finger_left_link" link2="finger_right_link" reason="Never"/>
+    <disable_collisions link1="finger_left_link" link2="finger_right_joint" reason="Never"/>
     <disable_collisions link1="finger_left_link" link2="hand_left_link" reason="Adjacent"/>
     <disable_collisions link1="finger_left_link" link2="hand_right_link" reason="Never"/>
     <disable_collisions link1="finger_left_link" link2="housing_link" reason="Never"/>
-    <disable_collisions link1="finger_right_link" link2="hand_left_link" reason="Never"/>
-    <disable_collisions link1="finger_right_link" link2="hand_right_link" reason="Adjacent"/>
-    <disable_collisions link1="finger_right_link" link2="housing_link" reason="Never"/>
+    <disable_collisions link1="finger_right_joint" link2="hand_left_link" reason="Never"/>
+    <disable_collisions link1="finger_right_joint" link2="hand_right_link" reason="Adjacent"/>
+    <disable_collisions link1="finger_right_joint" link2="housing_link" reason="Never"/>
     <disable_collisions link1="hand_left_link" link2="hand_right_link" reason="Never"/>
     <disable_collisions link1="hand_left_link" link2="housing_link" reason="Adjacent"/>
     <disable_collisions link1="hand_right_link" link2="housing_link" reason="Adjacent"/>

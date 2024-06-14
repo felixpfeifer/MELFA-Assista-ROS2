@@ -103,7 +103,6 @@
         <command_interface name="position"/>
         <state_interface name="position"/>
         <state_interface name="velocity"/>
-        <state_interface name="effort"/>
       </joint>
 
       <!-- from https://github.com/ros-controls/ros2_control/blob/f58d4072dbd1c3fd4e1f64cd10a19a2b60f59049/ros2_control_test_assets/include/ros2_control_test_assets/components_urdfs.hpp#L344 -->
