@@ -97,6 +97,14 @@
 
       </joint>
       
+      <joint name="joint_hand_right">
+        <param name="mimic">joint_hand_left</param>
+        <param name="multiplier">1</param>
+        <command_interface name="position"/>
+        <state_interface name="position"/>
+        <state_interface name="velocity"/>
+      </joint>
+
       <!-- from https://github.com/ros-controls/ros2_control/blob/f58d4072dbd1c3fd4e1f64cd10a19a2b60f59049/ros2_control_test_assets/include/ros2_control_test_assets/components_urdfs.hpp#L344 -->
       <gpio name="tool_flansch">
         <command_interface name="coact">
@@ -112,10 +120,13 @@
     </ros2_control>
 
   <!-- Enable Gazebo Plugins -->
-  <gazebo>
-    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-      <parameters>$(find melfa_assista_hardware)/config/melfa_controller.yaml</parameters>
-    </plugin>
-  </gazebo>
+ 
 
+  <xacro:if value="$(arg sim_mode)">
+    <gazebo>
+      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+        <parameters>$(find melfa_assista_hardware)/config/melfa_controller.yaml</parameters>
+      </plugin>
+    </gazebo>
+  </xacro:if>
 </robot>

@@ -24,7 +24,7 @@ def generate_launch_description():
     rsp = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory(package_name), 'launch', 'rsp.launch.py'
-        )]), launch_arguments={'sim_mode_time': 'false', "robot_ip": robot_ip}.items()
+        )]), launch_arguments={'sim_mode_time': 'false', 'use_mockup': 'true'}.items()
     )
 
     robot_description = Command(['ros2 param get --hide-type /robot_state_publisher robot_description'])
@@ -82,12 +82,6 @@ def generate_launch_description():
     )
 
     nodes = [
-        # Declare Args
-        DeclareLaunchArgument(
-            'robot_ip',
-            default_value='127.0.0.1',
-            description='Robot IP.',
-        ),
         rsp,
         delayed_controller_manager,
         robot_controller_spawner,

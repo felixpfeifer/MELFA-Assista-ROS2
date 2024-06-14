@@ -5,6 +5,9 @@ moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControll
 moveit_simple_controller_manager:
   controller_names:
     - robot_controller
+    - robot_arm_camera_tcp_controller
+    - robot_arm_tool_tcp_controller
+    - gripper_action_controller_controller
 
   robot_controller:
     type: FollowJointTrajectory
@@ -17,3 +20,10 @@ moveit_simple_controller_manager:
       - joint_4
       - joint_5
       - joint_6
+      
+  gripper_action_controller_controller:
+    type: GripperCommand
+    joints:
+      - joint_hand_left
+    action_ns: gripper_cmd
+    default: true

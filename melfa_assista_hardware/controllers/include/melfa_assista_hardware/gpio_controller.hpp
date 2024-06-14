@@ -7,15 +7,23 @@
 #include "std_msgs/msg/float64_multi_array.hpp"
 
 #include "controller_interface/controller_interface.hpp"
+#include <rclcpp/rclcpp.hpp>
+#include <rclcpp_action/rclcpp_action.hpp>
+#include <control_msgs/action/gripper_command.hpp>
 
 namespace melfa_assista_hardware
 {
+
+#define EFFORT_GRIPPER 160
+
     // namespace melfa_assista_hardware
     using CmdType = std_msgs::msg::Float64MultiArray;
+
     class  GPIOController : public controller_interface::ControllerInterface{
     
     public:
         RCLCPP_SHARED_PTR_DEFINITIONS(GPIOController);
+
 
         melfa_assista_hardware_PUBLIC
         controller_interface::InterfaceConfiguration command_interface_configuration() const override;
@@ -42,6 +50,7 @@ namespace melfa_assista_hardware
         private:
         std::vector<std::string> inputs_;
         std::vector<std::string> outputs_;
+        rclcpp::Logger logger_ = rclcpp::get_logger("GPIOController");
 
         protected:
         void initMsgs();
@@ -55,6 +64,7 @@ namespace melfa_assista_hardware
 
         // subscriber
         rclcpp::Subscription<CmdType>::SharedPtr subscription_command_;
+
     };
         
 }

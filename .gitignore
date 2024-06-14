@@ -1,2 +1,8 @@
 .vscode/
 build/
+
+# Ignoriere alle .idea Verzeichnisse
+**/.idea/
+
+# Ignoriere alle cmake-build Verzeichnisse
+**/cmake-build-debug/

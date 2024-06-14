@@ -1,13 +1,13 @@
 moveit_setup_assistant_config:
   urdf:
     package: melfa_assista_hardware
-    relative_path: urdf/RV-5AS.urdf.xacro
+    relative_path: urdf/robot.urdf.xacro
   srdf:
-    relative_path: config/Assista.srdf
+    relative_path: config/robot.srdf
   package_settings:
     author_name: Felix Pfeifer
     author_email: fpfeifer@stud.hs-heilbronn.de
-    generated_timestamp: 1715936933
+    generated_timestamp: 1718281046
   control_xacro:
     command:
       - position

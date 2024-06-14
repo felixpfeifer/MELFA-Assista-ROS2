@@ -2,22 +2,22 @@
 <!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
      Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
-  <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    
+<robot> 
+ 
   <link
     name="coact_base_link">
     <inertial>
       <origin
-        xyz="-0.0035845 0.0019636 0.012011"
+        xyz="0.0011461 -3.4094E-05 -0.011589"
         rpy="0 0 0" />
       <mass
         value="0.07902" />
       <inertia
-        ixx="4.1882E-05"
-        ixy="2.5898E-07"
-        ixz="-4.4967E-07"
-        iyy="3.7898E-05"
-        iyz="-3.1583E-07"
+        ixx="4.0149E-05"
+        ixy="-1.9916E-06"
+        ixz="5.4129E-07"
+        iyy="3.9631E-05"
+        iyz="-9.4644E-08"
         izz="7.2725E-05" />
     </inertial>
     <visual>
@@ -44,21 +44,34 @@
       </geometry>
     </collision>
   </link>
+  <joint
+    name="coact_base_joint"
+    type="fixed">
+    <origin
+      xyz="0 0 0.0321"
+      rpy="0 0 -${(45 * (pi/180))}" />
+    <parent
+      link="Link_6_1" />
+    <child
+      link="coact_base_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
   <link
     name="housing_link">
     <inertial>
       <origin
-        xyz="0.0004679 -7.9733E-06 -0.071807"
+        xyz="0.0004679 -7.9786E-06 -0.071807"
         rpy="0 0 0" />
       <mass
         value="0.38897" />
       <inertia
         ixx="0.00050627"
-        ixy="5.502E-08"
-        ixz="-1.027E-07"
+        ixy="5.4844E-08"
+        ixz="-1.0292E-07"
         iyy="0.00055192"
-        iyz="4.1906E-08"
-        izz="0.00032568" />
+        iyz="4.2618E-08"
+        izz="0.00032569" />
     </inertial>
     <visual>
       <origin
@@ -88,8 +101,8 @@
     name="housing_joint"
     type="fixed">
     <origin
-      xyz="-0.00274999999999998 -0.1325 0.00274999999999998"
-      rpy="1.5707963267949 0 0" />
+      xyz="0 0 0.1089"
+      rpy="0 0 2.3562" />
     <parent
       link="coact_base_link" />
     <child
@@ -101,7 +114,7 @@
     name="hand_left_link">
     <inertial>
       <origin
-        xyz="0.0015172 -0.015033 0.0033678"
+        xyz="-0.00091365 -0.015033 0.0033678"
         rpy="0 0 0" />
       <mass
         value="0.0034696" />
@@ -142,7 +155,7 @@
     type="prismatic">
     <origin
       xyz="0 0 0.0122"
-      rpy="1.5708 0 0" />
+      rpy="1.5708 0 3.1416" />
     <parent
       link="housing_link" />
     <child
@@ -150,26 +163,26 @@
     <axis
       xyz="1 0 0" />
     <limit
-      lower="0.0"
-      upper="0.006"
-      effort="200"
-      velocity="1.0" />
+      lower="0"
+      upper="0.03"
+      effort="120"
+      velocity="0.5" />
   </joint>
   <link
     name="finger_left_link">
     <inertial>
       <origin
-        xyz="0.01141 1.352E-08 0.024079"
+        xyz="0.01141 1.453E-08 0.024079"
         rpy="0 0 0" />
       <mass
-        value="0.013672" />
+        value="0.011888" />
       <inertia
-        ixx="2.7756E-06"
-        ixy="-5.3984E-13"
-        ixz="1.3676E-07"
-        iyy="2.5808E-06"
-        iyz="1.4625E-12"
-        izz="7.7774E-07" />
+        ixx="2.4136E-06"
+        ixy="-7.1143E-13"
+        ixz="1.1892E-07"
+        iyy="2.2441E-06"
+        iyz="1.2315E-12"
+        izz="6.7629E-07" />
     </inertial>
     <visual>
       <origin
@@ -182,7 +195,7 @@
       <material
         name="">
         <color
-          rgba="0.79608 0.82353 0.93725 1" />
+          rgba="0.79216 0.81961 0.93333 1" />
       </material>
     </visual>
     <collision>
@@ -199,7 +212,7 @@
     name="finger_left_joint"
     type="fixed">
     <origin
-      xyz="0.0080313 -0.012 0"
+      xyz="0.0056005 -0.012 0"
       rpy="-1.5708 0 0" />
     <parent
       link="hand_left_link" />
@@ -212,7 +225,7 @@
     name="hand_right_link">
     <inertial>
       <origin
-        xyz="0.0015161 -0.015033 0.0033678"
+        xyz="-0.0011169 -0.015033 0.0033678"
         rpy="0 0 0" />
       <mass
         value="0.0034696" />
@@ -249,11 +262,11 @@
     </collision>
   </link>
   <joint
-    name="hand_right_joint"
+    name="joint_hand_right"
     type="prismatic">
     <origin
       xyz="0 0 0.0122"
-      rpy="1.5708 0 -3.1416" />
+      rpy="1.5708 0 0" />
     <parent
       link="housing_link" />
     <child
@@ -261,30 +274,30 @@
     <axis
       xyz="1 0 0" />
     <limit
-      lower="0.0"
-      upper="0.006"
-      effort="200"
-      velocity="1.0" />
+      lower="0"
+      upper="0.03"
+      effort="120"
+      velocity="0.5" />
     <mimic
       joint="joint_hand_left"
       multiplier="1"
       offset="0" />
   </joint>
   <link
-    name="finger_right_link">
+    name="finger_right_joint">
     <inertial>
       <origin
-        xyz="0.01141 1.352E-08 0.024079"
+        xyz="0.01141 1.453E-08 0.024079"
         rpy="0 0 0" />
       <mass
-        value="0.011888" />
+        value="0.013672" />
       <inertia
-        ixx="2.4136E-06"
-        ixy="-4.6943E-13"
-        ixz="1.1892E-07"
-        iyy="2.2441E-06"
-        iyz="1.2718E-12"
-        izz="6.7629E-07" />
+        ixx="2.7756E-06"
+        ixy="-8.1815E-13"
+        ixz="1.3676E-07"
+        iyy="2.5808E-06"
+        iyz="1.4163E-12"
+        izz="7.7774E-07" />
     </inertial>
     <visual>
       <origin
@@ -292,12 +305,12 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file://$(find melfa_assista_hardware)/meshes/finger_right_link.stl" />
+          filename="file://$(find melfa_assista_hardware)/meshes/finger_right_joint.stl" />
       </geometry>
       <material
         name="">
         <color
-          rgba="0.79216 0.81961 0.93333 1" />
+          rgba="0.79608 0.82353 0.93725 1" />
       </material>
     </visual>
     <collision>
@@ -306,7 +319,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="file://$(find melfa_assista_hardware)/meshes/finger_right_link.stl" />
+          filename="file://$(find melfa_assista_hardware)/meshes/finger_right_joint.stl" />
       </geometry>
     </collision>
   </link>
@@ -314,21 +327,24 @@
     name="finger_right_joint"
     type="fixed">
     <origin
-      xyz="0.0080302 -0.012 0"
+      xyz="0.0053973 -0.012 0"
       rpy="-1.5708 0 0" />
     <parent
       link="hand_right_link" />
     <child
-      link="finger_right_link" />
+      link="finger_right_joint" />
     <axis
       xyz="0 0 0" />
   </joint>
 
-  <!-- Tool Joint Connection to the Robot -->
-  <joint name="joint_tool_robot" type="fixed">
-    <origin xyz="0.0 0.0 0.01" rpy="-${(pi/2)} 0.0 ${(pi/2)}"/>
+  <link name="tcp_gripper">
+    
+  </link>
+
+  <joint name="tcp_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.182" rpy="0.0 0.0 0.0"/>
     <parent link="Link_6_1"/>
-    <child link="coact_base_link"/>
+    <child link="tcp_gripper"/>
   </joint>
- 
+
 </robot>
