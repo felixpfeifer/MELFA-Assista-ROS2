@@ -112,7 +112,7 @@
 </link>
 
 <joint name="camera_tcp_joint" type="fixed">
-  <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+  <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 -${(90 * pi /180)}"/>
   <parent link="camera_link"/>
   <child link="camera_tcp"/>
  
