@@ -214,7 +214,7 @@ return_type melfa_assista_hardware::MelfaHW::write(const rclcpp::Time & /*time*/
     _send_buff.BitTop = STARTINGBIT;            // First bit of the 16 Bits array
     _send_buff.BitMask = ((1 << 1) | (1 << 0)); // Mask for the Databits of the 16 Bits, used are the first two
 
-    if (gpio_command_[0] > 0.90) // Open
+    if (gpio_command_[0] < 0.5) // Open
     {
         _send_buff.IoData = (0 << CLOSE | 1 << OPEN);
     } else // Close
@@ -338,13 +338,13 @@ CallbackReturn melfa_assista_hardware::MelfaHW::on_activate(const rclcpp_lifecyc
     _send_buff.RecvIOType = MXT_IO_IN;
     _send_buff.BitTop = STARTINGBIT;            // First bit of the 16 Bits array
     _send_buff.BitMask = ((1 << 1) | (1 << 0)); // Mask for the Databits of the 16 Bits, used are the first two
-    _send_buff.IoData = (0 << CLOSE | 1 << OPEN);
+    _send_buff.IoData = ( 0 << CLOSE | 1 << OPEN);
 
     _send_buff.CCount = _counter;
 
     // Write GPIO Vectors
-    gpio_command_[0] = 1.0;
-    gpio_state_[0] = 1.0;
+    gpio_command_[0] = 0.0;
+    gpio_state_[0] = 0.0;
 
     auto size = sendto(_socket, &_send_buff, sizeof(_send_buff), NULL, (const struct sockaddr *) &_addres,
                        sizeof(_addres));

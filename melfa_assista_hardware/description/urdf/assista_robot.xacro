@@ -199,7 +199,6 @@
   <parent link="Link_4_1"/>
   <child link="Link_5_1"/>
   <axis xyz="0.0 1.0 -0.0"/>
-  
   <limit lower="${-(120 * pi)/180}" upper="${(120 * pi)/180}" effort="1000" velocity="${(356*pi)/180}"/>
 </joint>
 
