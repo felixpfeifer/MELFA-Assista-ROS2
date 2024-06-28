@@ -363,6 +363,12 @@ CallbackReturn melfa_assista_hardware::MelfaHW::on_activate(const rclcpp_lifecyc
     int n = recvfrom(_socket, &_recv_buff, sizeof(_recv_buff), 0, NULL, NULL);
     if (n < 0) {
         RCLCPP_ERROR(_logger, "Cannot get packed to Controller");
+        error_connection_counter++;
+        if (error_connection_counter > 1000) {
+            RCLCPP_ERROR(_logger, "Cannot connect to the Robot");
+            return CallbackReturn::FAILURE;
+        }
+        
     }
     JOINT *joints = (JOINT *) &_recv_buff.dat;
     joint_position_state_[0] = joints->j1;

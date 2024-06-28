@@ -135,6 +135,10 @@ namespace melfa_assista_hardware {
         rclcpp::Logger _logger = rclcpp::get_logger("melfa_assista_hardware"); // Logger for the hardware interface
         std::string tool_joint_name = "joint_hand_left";
         std::string tool_joint_name2 = "joint_hand_right";
+
+
+        int error_connection_counter = 0; // Counter for the connection errors
+
     };
 }
 
