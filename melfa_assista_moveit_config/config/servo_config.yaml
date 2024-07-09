@@ -45,7 +45,7 @@ check_octomap_collisions: false  # Check collision against the octomap (if a 3D 
 
 ## MoveIt properties
 move_group_name: "robot"  # Often 'manipulator' or 'arm'
-ee_frame_name : "camera_tcp" # End-effector frame name
+ee_frame_name : "tcp_gripper" # End-effector frame name
 planning_frame : "world"
 robot_link_command_frame : "world"  # Frame in which to interpret incoming commands"
 ## Configure handling of singularities and joint limits
